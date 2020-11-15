@@ -57,7 +57,7 @@
         android:id="@+id/signin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#E7686E"
+        android:background="@drawable/custom_btn"
         android:text="Sign In" />
 
     <ProgressBar

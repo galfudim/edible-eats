@@ -9,4 +9,12 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <!--  Strings used for diet spinner  -->
+    <string-array name="diets_array">
+        <item>Pescatarian</item>
+        <item>Vegan</item>
+        <item>Vegetarian</item>
+        <item>Ketogenic</item>
+    </string-array>
 </resources>

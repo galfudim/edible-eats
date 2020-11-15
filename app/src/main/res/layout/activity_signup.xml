@@ -11,30 +11,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="36dp"
-        android:textColor="#E7686E"
-        android:layout_gravity="center"
-        android:textStyle="bold"
-        android:text="EDIBLE EATS"/>
-
-    <TextView
-        android:layout_width="152dp"
-        android:layout_height="158dp"
-        android:layout_gravity="center"
-        android:background="@drawable/cutlery" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:textSize="24dp"
         android:textStyle="bold"
-        android:text="Log In"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="Hi there! Nice to see you again."/>
+        android:text="Sign Up"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -69,27 +49,37 @@
         android:importantForAutofill="no" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/signin"
+        android:id="@+id/next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_btn"
         android:textColor="@color/white"
-        android:layout_marginBottom="36dp"
-        android:text="Sign In"
+        android:layout_marginBottom="24dp"
+        android:text="Continue"
         android:textStyle="bold"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="18dp"
-        android:textColor="#F68F1C"
-        android:layout_gravity="center"
-        android:text="Sign Up"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        android:gravity="center">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:layout_gravity="center"
+            android:text="Have an Account?  "/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Sign In"
+            android:textColor="#F68F1C"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
 </LinearLayout>

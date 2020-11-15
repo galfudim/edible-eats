@@ -11,6 +11,21 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="36dp"
+        android:textColor="#E7686E"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:text="EDIBLE EATS"/>
+
+    <TextView
+        android:layout_width="152dp"
+        android:layout_height="158dp"
+        android:layout_gravity="center"
+        android:background="@drawable/cutlery" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textSize="24dp"
         android:textStyle="bold"
         android:text="Log In"/>
@@ -53,12 +68,23 @@
         android:layout_marginBottom="24dp"
         android:importantForAutofill="no" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/signin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_btn"
+        android:textColor="@color/white"
+        android:layout_marginBottom="36dp"
         android:text="Sign In" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#F68F1C"
+        android:layout_gravity="center"
+        android:text="Sign Up"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

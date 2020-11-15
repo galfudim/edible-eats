@@ -1,4 +1,4 @@
-Edible Eats Group 
+Edible Eats
 
 Name: Gal Fudim Group Number: 47 Project Name: Edible Eats
 

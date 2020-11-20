@@ -10,6 +10,7 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
+
     <!--  Strings used for diet spinner  -->
     <string-array name="diets_array">
         <item>Pescatarian</item>
@@ -17,4 +18,20 @@
         <item>Vegetarian</item>
         <item>Ketogenic</item>
     </string-array>
+
+
+
+    <string name="diet_descriptions">Diet Descriptions</string>
+    <string name="vegan">Vegan</string>
+    <string name="vegetarian">Vegetarian</string>
+    <string name="pescatarian">Pescatarian</string>
+    <string name="ketogenic">Ketogenic</string>
+
+    <string name="vegan_info"> Vegan diet is devoid of all animal products, including meat, eggs and dairy.</string>
+    <string name="vegetarian_info">A vegetarian diet does not include any meat, poultry, or seafood. It is a meal plan made up of foods that come mostly from plants. </string>
+    <string name="pescatarian_info">Pescetarian is a diet that incorporates seafood as the only source of meat in an otherwise vegetarian diet</string>
+    <string name="ketogenic_info">“Ketogenic” is a term for a low-carb diet (like the Atkins diet). The idea is for you to get more calories from protein and fat and less from carbohydrates. You cut back most on the carbs that are easy to digest, like sugar, soda, pastries, and white bread.</string>
+
+
+
 </resources>

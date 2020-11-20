@@ -3,8 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="courses.projects.edible_eats.MainActivity">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/diet_description"
+        android:title="@string/diet_descriptions">
+
+        <menu>
+            <item
+                android:id="@+id/Vegan"
+                android:title="@string/vegan"
+                />
+            <item
+                android:id="@+id/Vegetarian"
+                android:title="@string/vegetarian"
+                />
+            <item
+                android:id="@+id/Pescatarian"
+                android:title="@string/pescatarian"
+                />
+            <item
+                android:id="@+id/Ketogenic"
+                android:title="@string/ketogenic"
+                />
+        </menu>
+    </item>
 </menu>

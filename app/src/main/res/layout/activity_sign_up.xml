@@ -49,13 +49,13 @@
         android:importantForAutofill="no" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/next"
+        android:id="@+id/sign_up"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_btn"
         android:textColor="@color/white"
         android:layout_marginBottom="24dp"
-        android:text="Continue"
+        android:text="Sign Up"
         android:textStyle="bold"/>
 
     <LinearLayout
@@ -70,7 +70,7 @@
             android:textStyle="bold"
             android:textSize="18dp"
             android:layout_gravity="center"
-            android:text="Have an Account?  "/>
+            android:text="Already have an account?  "/>
 
         <TextView
             android:layout_width="wrap_content"

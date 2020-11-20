@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:textSize="24dp"
         android:textStyle="bold"
-        android:text="Log In"/>
+        android:text="Sign In"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
         android:importantForAutofill="no" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/signin"
+        android:id="@+id/sign_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_btn"

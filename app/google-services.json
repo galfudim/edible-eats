@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "848364017809",
+    "firebase_url": "https://edible-eats.firebaseio.com",
+    "project_id": "edible-eats",
+    "storage_bucket": "edible-eats.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848364017809:android:58d39a99230998fa0b0730",
+        "android_client_info": {
+          "package_name": "courses.projects.edible_eats"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848364017809-1mi1hf0nlf390bnbvqrhv3grtrnk1ogj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsobvRsqCHyrIduGUkyChthQLfRmt8ITw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848364017809-1mi1hf0nlf390bnbvqrhv3grtrnk1ogj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

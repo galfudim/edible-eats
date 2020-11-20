@@ -10,14 +10,10 @@ import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 
-class MainActivity : AppCompatActivity() {
-    private var userEmail: EditText? = null
-    private var userPassword: EditText? = null
-    private var loginBtn: Button? = null
-
+class UserPreferenceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_user_preference)
 
 
     }

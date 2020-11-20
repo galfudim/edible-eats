@@ -22,7 +22,7 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_sign_in)
 
         mDatabase = FirebaseDatabase.getInstance()
         mDatabaseReference = mDatabase!!.reference.child("Users")
@@ -56,7 +56,7 @@ class SignInActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, "Sign in successful!", Toast.LENGTH_LONG)
                         .show()
                     startActivity(
-                        Intent(this@SignInActivity, DashboardActivity::class.java).putExtra(
+                        Intent(this@SignInActivity, UserPreferenceActivity::class.java).putExtra(
                             USER_ID, mAuth!!.currentUser!!.uid
                         )
                     )
@@ -71,7 +71,6 @@ class SignInActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val USER_EMAIL = "com.example.tesla.myhomelibrary.useremail"
         const val USER_ID = "com.example.tesla.myhomelibrary.userid"
     }
 }

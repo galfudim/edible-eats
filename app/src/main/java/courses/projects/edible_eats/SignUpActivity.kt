@@ -16,7 +16,6 @@ class SignUpActivity : AppCompatActivity() {
     private var mAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
@@ -31,7 +30,6 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun signUpNewUser() {
-
         val email: String = emailTV!!.text.toString()
         val password: String = passwordTV!!.text.toString()
 

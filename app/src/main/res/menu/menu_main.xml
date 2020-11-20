@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="courses.projects.edible_eats.MainActivity">
+    tools:context="courses.projects.edible_eats.UserPreferenceActivity">
     <item
         android:id="@+id/diet_description"
         android:title="@string/diet_descriptions">

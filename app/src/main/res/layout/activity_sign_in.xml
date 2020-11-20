@@ -6,34 +6,21 @@
     android:gravity="center_vertical"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".MainActivity">
+    tools:context=".SignInActivity">
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="36dp"
+        android:textSize="44dp"
         android:textColor="#E7686E"
-        android:layout_gravity="center"
-        android:textStyle="bold"
-        android:text="EDIBLE EATS"/>
-
-    <TextView
-        android:layout_width="152dp"
-        android:layout_height="158dp"
-        android:layout_gravity="center"
-        android:background="@drawable/cutlery" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24dp"
         android:textStyle="bold"
         android:text="Sign In"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="34dp"
         android:text="Hi there! Nice to see you again."/>
 
     <TextView
@@ -78,18 +65,4 @@
         android:text="Sign In"
         android:textStyle="bold"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="18dp"
-        android:textColor="#F68F1C"
-        android:layout_gravity="center"
-        android:text="Sign Up"/>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
 </LinearLayout>

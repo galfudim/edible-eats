@@ -6,13 +6,14 @@
     android:gravity="center_vertical"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".MainActivity">
+    tools:context=".SignUpActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24dp"
+        android:textSize="44dp"
         android:textStyle="bold"
+        android:textColor="#E7686E"
         android:layout_marginBottom="24dp"
         android:text="Sign Up"/>
 
@@ -57,29 +58,5 @@
         android:layout_marginBottom="24dp"
         android:text="Sign Up"
         android:textStyle="bold"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="18dp"
-            android:layout_gravity="center"
-            android:text="Already have an account?  "/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Sign In"
-            android:textColor="#F68F1C"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-    </LinearLayout>
 
 </LinearLayout>

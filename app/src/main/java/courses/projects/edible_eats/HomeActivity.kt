@@ -1,6 +1,5 @@
 package courses.projects.edible_eats
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button

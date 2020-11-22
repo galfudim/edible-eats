@@ -27,8 +27,9 @@ class UserPreferenceActivity : AppCompatActivity() {
         option4 = findViewById(R.id.option4)
         search = findViewById(R.id.search)
 
-        var intent = Intent(this@UserPreferenceActivity, SearchActivity::class.java)
-        startActivity(intent)
+        search!!.setOnClickListener {
+            search()
+        }
 
         val dietOptions = resources.getStringArray(R.array.diets_array)
 
@@ -49,6 +50,8 @@ class UserPreferenceActivity : AppCompatActivity() {
                 // write code?
             }
         }
+
+
 
     }
 
@@ -89,6 +92,11 @@ class UserPreferenceActivity : AppCompatActivity() {
         option2!!.isChecked = false
         option3!!.isChecked = false
         option4!!.isChecked = false
+    }
+
+    private fun search(){
+        var intent = Intent(this@UserPreferenceActivity, SearchActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

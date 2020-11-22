@@ -1,21 +1,20 @@
 package courses.projects.edible_eats
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.CheckBox
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 
 class UserPreferenceActivity : AppCompatActivity() {
     private var option1: CheckBox? = null
     private var option2: CheckBox? = null
     private var option3: CheckBox? = null
     private var option4: CheckBox? = null
+    private var search: Button? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +25,10 @@ class UserPreferenceActivity : AppCompatActivity() {
         option2 = findViewById(R.id.option2)
         option3 = findViewById(R.id.option3)
         option4 = findViewById(R.id.option4)
+        search = findViewById(R.id.search)
+
+        var intent = Intent(this@UserPreferenceActivity, SearchActivity::class.java)
+        startActivity(intent)
 
         val dietOptions = resources.getStringArray(R.array.diets_array)
 
@@ -59,14 +62,26 @@ class UserPreferenceActivity : AppCompatActivity() {
 
     private fun displayVeganFoods() {
         clearSelections()
+        option1!!.text = "Vegetables"
+        option2!!.text = "Salad"
+        option3!!.text = "Tofu"
+        option4!!.text = "Fruit"
     }
 
     private fun displayVegetarianFoods() {
         clearSelections()
+        option1!!.text = "Fish"
+        option2!!.text = "Salad"
+        option3!!.text = "Fruit"
+        option4!!.text = "Fries"
     }
 
     private fun displayKetogenicFoods() {
         clearSelections()
+        option1!!.text = "Chicken"
+        option2!!.text = "Turkey"
+        option3!!.text = "Tacos"
+        option4!!.text = "Beef"
     }
 
     private fun clearSelections() {

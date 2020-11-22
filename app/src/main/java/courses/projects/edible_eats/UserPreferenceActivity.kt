@@ -51,8 +51,6 @@ class UserPreferenceActivity : AppCompatActivity() {
             }
         }
 
-
-
     }
 
     private fun displayPescatarianFoods() {

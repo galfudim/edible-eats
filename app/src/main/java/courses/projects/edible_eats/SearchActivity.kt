@@ -40,7 +40,7 @@ class SearchActivity : AppCompatActivity() {
                     if (restaurantList!!.contains(query)) {
                         adapter!!.filter.filter(query)
                     } else {
-                        Toast.makeText(this@SearchActivity,"Not found",
+                        Toast.makeText(this@SearchActivity,"Restaurant Not found",
                             Toast.LENGTH_LONG).show()
                     }
                     return false

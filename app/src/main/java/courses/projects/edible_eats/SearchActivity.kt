@@ -1,13 +1,13 @@
 package courses.projects.edible_eats
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 
 
 class SearchActivity : AppCompatActivity() {
@@ -22,6 +22,7 @@ class SearchActivity : AppCompatActivity() {
         listView = findViewById(R.id.listView)
         restaurantList = ArrayList()
         populateRestaurantList()
+        getFoodPreferences()
 
         adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, restaurantList!!)
         listView!!.adapter = adapter
@@ -33,14 +34,14 @@ class SearchActivity : AppCompatActivity() {
 
         val searchViewItem: MenuItem = menu.findItem(R.id.search_bar)
         val searchView = searchViewItem.actionView as android.widget.SearchView
-        searchView.setQueryHint("Search Restaurants");
+        searchView.queryHint = "Search Restaurants";
         searchView.setOnQueryTextListener(
             object : android.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
                     if (restaurantList!!.contains(query)) {
                         adapter!!.filter.filter(query)
                     } else {
-                        Toast.makeText(this@SearchActivity,"Restaurant Not found",
+                        Toast.makeText(this@SearchActivity,"Restaurant Not Found",
                             Toast.LENGTH_LONG).show()
                     }
                     return false
@@ -54,7 +55,7 @@ class SearchActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    private fun populateRestaurantList(){
+    private fun populateRestaurantList() {
         restaurantList!!.add("Chipotle")
         restaurantList!!.add("SweetGreen")
         restaurantList!!.add("Playa Bowls")
@@ -71,5 +72,21 @@ class SearchActivity : AppCompatActivity() {
         restaurantList!!.sort()
     }
 
+    private fun getFoodPreferences() {
+        val diet = intent.getStringExtra(DIET_SELECTION)
+        val preferences = intent.getStringArrayListExtra(FOOD_PREFERENCES)
+
+        Log.d("DIET", diet!!)
+        for(pref in preferences!!) {
+            Log.d("PREFERENCE", pref)
+        }
+
+        Log.d("COUNT", preferences.size.toString())
+    }
+
+    companion object {
+        const val FOOD_PREFERENCES = "Favorite Food"
+        const val DIET_SELECTION = "Diet Preference"
+    }
 
 }

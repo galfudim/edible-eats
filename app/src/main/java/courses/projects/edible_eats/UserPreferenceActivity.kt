@@ -15,6 +15,7 @@ class UserPreferenceActivity : AppCompatActivity() {
     private var option3: CheckBox? = null
     private var option4: CheckBox? = null
     private var search: Button? = null
+    private var dietOption: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +28,7 @@ class UserPreferenceActivity : AppCompatActivity() {
         option4 = findViewById(R.id.option4)
         search = findViewById(R.id.search)
 
+        // Navigate to Search Activity
         search!!.setOnClickListener {
             search()
         }
@@ -44,6 +46,8 @@ class UserPreferenceActivity : AppCompatActivity() {
                     "Vegetarian" ->{ displayVegetarianFoods() }
                     "Ketogenic" ->{ displayKetogenicFoods() }
                 }
+
+                addDietSelection(dietOptions[position])
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -92,8 +96,37 @@ class UserPreferenceActivity : AppCompatActivity() {
         option4!!.isChecked = false
     }
 
+    private fun addFoodPreferences(): ArrayList<String> {
+        var foodPreferences = ArrayList<String>()
+
+        if(option1!!.isChecked){
+            foodPreferences.add(option1!!.text as String)
+        }
+
+        if(option2!!.isChecked){
+            foodPreferences.add(option2!!.text as String)
+        }
+
+        if(option3!!.isChecked){
+            foodPreferences.add(option3!!.text as String)
+        }
+
+        if(option4!!.isChecked){
+            foodPreferences.add(option4!!.text as String)
+        }
+
+        return foodPreferences
+    }
+
+    private fun addDietSelection(option: String) {
+        dietOption = option
+    }
+
     private fun search(){
         var intent = Intent(this@UserPreferenceActivity, SearchActivity::class.java)
+        // TODO: put information for what user selected
+        intent.putExtra(DIET_SELECTION, dietOption)
+        intent.putExtra(FOOD_PREFERENCES, addFoodPreferences())
         startActivity(intent)
     }
 
@@ -128,5 +161,10 @@ class UserPreferenceActivity : AppCompatActivity() {
             }
             else -> return super.onOptionsItemSelected(item)
         }
+    }
+
+    companion object {
+        const val FOOD_PREFERENCES = "Favorite Food"
+        const val DIET_SELECTION = "Diet Preference"
     }
 }

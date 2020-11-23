@@ -13,9 +13,16 @@
         android:layout_height="wrap_content"
         android:textSize="44dp"
         android:textStyle="bold"
-        android:textColor="#E7686E"
+        android:textColor="@android:color/black"
         android:layout_marginBottom="24dp"
         android:text="Sign Up"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:layout_marginBottom="44dp"
+        android:text="Welcome! Thanks for joining."/>
 
     <TextView
         android:layout_width="wrap_content"

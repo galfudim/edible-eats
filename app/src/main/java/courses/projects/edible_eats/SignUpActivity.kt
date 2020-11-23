@@ -2,11 +2,13 @@ package courses.projects.edible_eats
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -33,7 +35,7 @@ class SignUpActivity : AppCompatActivity() {
         val email: String = emailTV!!.text.toString()
         val password: String = passwordTV!!.text.toString()
 
-        mAuth!!.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+        mAuth!!.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
                 Toast.makeText(applicationContext, "Sign up successful!", Toast.LENGTH_LONG)
                     .show()

@@ -15,7 +15,7 @@
         android:textColor="#E7686E"
         android:layout_gravity="center"
         android:textStyle="bold"
-        android:text="EDIBLE EATS"/>
+        android:text="@string/edible_eats"/>
 
     <TextView
         android:layout_width="152dp"
@@ -32,7 +32,7 @@
         android:background="@drawable/custom_btn"
         android:textColor="@color/white"
         android:layout_marginBottom="36dp"
-        android:text="Sign In"
+        android:text="@string/sign_in"
         android:textStyle="bold"/>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -42,7 +42,7 @@
         android:background="@drawable/custom_btn"
         android:textColor="@color/white"
         android:layout_marginBottom="36dp"
-        android:text="Sign Up"
+        android:text="@string/sign_up"
         android:textStyle="bold"/>
 
 </LinearLayout>

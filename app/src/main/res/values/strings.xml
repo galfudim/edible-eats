@@ -10,6 +10,10 @@
         <item>Ketogenic</item>
     </string-array>
 
+    <!--  String used for profile name  -->
+    <string name="set_profile_name">Set Profile Name</string>
+    <string name="pick_your_preferences">Pick your preferences below</string>
+
     <!--  Strings used for diet menu display  -->
     <string name="diet_descriptions">Diet Descriptions</string>
     <string name="vegan">Vegan</string>
@@ -21,5 +25,23 @@
     <string name="vegetarian_info">A vegetarian diet does not include any meat, poultry, or seafood. It is a meal plan made up of foods that come mostly from plants. </string>
     <string name="pescatarian_info">Pescatarian is a diet that incorporates seafood as the only source of meat in an otherwise vegetarian diet</string>
     <string name="ketogenic_info">“Ketogenic” is a term for a low-carb diet (like the Atkins diet). The idea is for you to get more calories from protein and fat and less from carbohydrates. You cut back most on the carbs that are easy to digest, like sugar, soda, pastries, and white bread.</string>
+
+    <!--  Home/Sign In/Sign Up Activity Strings  -->
+    <string name="edible_eats">EDIBLE EATS</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="hi_there">Hi there! Nice to see you again.</string>
+    <string name="welcome_thanks_for_joining">Welcome! Thanks for joining.</string>
+    <string name="example_email">example@email.com</string>
+    <string name="enter_password">Enter password</string>
+
+    <!--  User Preference Strings  -->
+    <string name="what_is_your_diet">What is your diet?</string>
+    <string name="select_your_favorite_foods">Select your favorite foods:</string>
+    <string name="find_those_eateries">Find those Eateries!</string>
+
+
 
 </resources>

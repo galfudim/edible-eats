@@ -4,8 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -19,6 +21,7 @@ class SignInActivity : AppCompatActivity() {
     private var userPassword: EditText? = null
     private var signInButton: Button? = null
     private var mAuth: FirebaseAuth? = null
+    private var progressBar: ProgressBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +33,7 @@ class SignInActivity : AppCompatActivity() {
         userEmail = findViewById(R.id.email)
         userPassword = findViewById(R.id.password)
         signInButton = findViewById(R.id.sign_in)
+        progressBar = findViewById(R.id.progressBar)
 
         signInButton!!.setOnClickListener {
             signInUserAccount()
@@ -37,6 +41,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun signInUserAccount() {
+        progressBar?.visibility = View.VISIBLE
 
         val email: String = userEmail?.text.toString()
         val password: String = userPassword?.text.toString()
@@ -55,15 +60,13 @@ class SignInActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Toast.makeText(applicationContext, "Sign in successful!", Toast.LENGTH_LONG)
                         .show()
-                    startActivity(
-                        Intent(this@SignInActivity, UserPreferenceActivity::class.java).putExtra(
-                            USER_ID, mAuth!!.currentUser!!.uid
-                        )
-                    )
+                    var intent = Intent(this@SignInActivity, UserPreferenceActivity::class.java)
+                    intent.putExtra(USER_ID, mAuth!!.currentUser!!.uid)
+                    startActivity(intent)
                 } else {
                     Toast.makeText(
                         applicationContext,
-                        "Sign in failed! Please try again later",
+                        "Sign in failed! Please check Email and/or Password.",
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -71,6 +74,6 @@ class SignInActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val USER_ID = "com.example.tesla.myhomelibrary.userid"
+        const val USER_ID = "courses.projects.edible_eats.userid"
     }
 }

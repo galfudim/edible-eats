@@ -3,11 +3,12 @@ package courses.projects.edible_eats
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+
 
 class UserPreferenceActivity : AppCompatActivity() {
     private var option1: CheckBox? = null
@@ -16,6 +17,7 @@ class UserPreferenceActivity : AppCompatActivity() {
     private var option4: CheckBox? = null
     private var search: Button? = null
     private var dietOption: String? = null
+    private var profileName: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,66 +29,54 @@ class UserPreferenceActivity : AppCompatActivity() {
         option3 = findViewById(R.id.option3)
         option4 = findViewById(R.id.option4)
         search = findViewById(R.id.search)
+        profileName = findViewById(R.id.profile_name_text)
 
         // Navigate to Search Activity
         search!!.setOnClickListener {
             search()
         }
 
+        // Utilized for diet selection
         val dietOptions = resources.getStringArray(R.array.diets_array)
 
-        dietSelection.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener {
+        dietSelection.setSelection(0,false)
+        dietSelection.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                Toast.makeText(applicationContext, "You selected " + dietOptions[position],
-                    Toast.LENGTH_SHORT).show()
-                when(dietOptions[position]){
-                    "Pescatarian" ->{ displayPescatarianFoods() }
-                    "Vegan" ->{ displayVeganFoods() }
-                    "Vegetarian" ->{ displayVegetarianFoods() }
-                    "Ketogenic" ->{ displayKetogenicFoods() }
+                when(dietOptions[position]) {
+                    "Pescatarian" -> {
+                        displayFoods("Fish", "Salad", "Taco", "Fries")
+                    }
+                    "Vegan" -> {
+                        displayFoods("Vegetables", "Salad", "Tofu", "Fruit")
+                    }
+                    "Vegetarian" -> {
+                        displayFoods("Faux meat", "Salad", "Taco", "Fries")
+                    }
+                    "Ketogenic" -> {
+                        displayFoods("Chicken", "Turkey", "Taco", "Beef")
+                    }
                 }
+
+                Toast.makeText(
+                    applicationContext, "You selected " + dietOptions[position], Toast.LENGTH_SHORT
+                ).show()
 
                 addDietSelection(dietOptions[position])
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                // write code?
+                // Do nothing
             }
         }
 
     }
 
-    private fun displayPescatarianFoods() {
+    private fun displayFoods(food1:String, food2:String, food3:String, food4:String) {
         clearSelections()
-        option1!!.text = "Fish"
-        option2!!.text = "Salad"
-        option3!!.text = "Tacos"
-        option4!!.text = "Fries"
-    }
-
-    private fun displayVeganFoods() {
-        clearSelections()
-        option1!!.text = "Vegetables"
-        option2!!.text = "Salad"
-        option3!!.text = "Tofu"
-        option4!!.text = "Fruit"
-    }
-
-    private fun displayVegetarianFoods() {
-        clearSelections()
-        option1!!.text = "Fish"
-        option2!!.text = "Salad"
-        option3!!.text = "Fruit"
-        option4!!.text = "Fries"
-    }
-
-    private fun displayKetogenicFoods() {
-        clearSelections()
-        option1!!.text = "Chicken"
-        option2!!.text = "Turkey"
-        option3!!.text = "Tacos"
-        option4!!.text = "Beef"
+        option1!!.text = food1
+        option2!!.text = food2
+        option3!!.text = food3
+        option4!!.text = food4
     }
 
     private fun clearSelections() {
@@ -125,6 +115,12 @@ class UserPreferenceActivity : AppCompatActivity() {
     private fun search(){
         var intent = Intent(this@UserPreferenceActivity, SearchActivity::class.java)
         // TODO: put information for what user selected
+        if(!option1!!.isChecked && !option2!!.isChecked && !option3!!.isChecked && !option4!!.isChecked){
+            Toast.makeText(
+                applicationContext, "Please make a selection!", Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
         intent.putExtra(DIET_SELECTION, dietOption)
         intent.putExtra(FOOD_PREFERENCES, addFoodPreferences())
         startActivity(intent)
@@ -135,11 +131,28 @@ class UserPreferenceActivity : AppCompatActivity() {
         return true;
     }
 
-    override fun onOptionsItemSelected(item : MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val dlg: AlertDialog.Builder =  AlertDialog.Builder(this)
 
         when (item.itemId) {
             R.id.profile_name -> {
+                profileName!!.text = getString(R.string.pick_your_preferences)
+                val profile = EditText(this)
+
+                dlg.setMessage("Enter profile name")
+                dlg.setTitle("Update Profile Name")
+                dlg.setView(profile)
+
+                dlg.setPositiveButton("Done") { _, _ ->
+                    val name = profile.text.toString()
+                    profileName!!.text = profileName!!.text.toString() + ", " + name
+                }
+
+                dlg.setNegativeButton("Cancel") { _, _ ->
+                    dlg.create().dismiss()
+                }
+
+                dlg.show()
                 return true
             }
             R.id.Vegan -> {

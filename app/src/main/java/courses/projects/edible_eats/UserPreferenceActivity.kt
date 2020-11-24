@@ -139,6 +139,9 @@ class UserPreferenceActivity : AppCompatActivity() {
         val dlg: AlertDialog.Builder =  AlertDialog.Builder(this)
 
         when (item.itemId) {
+            R.id.profile_name -> {
+                return true
+            }
             R.id.Vegan -> {
                 dlg.setMessage(R.string.vegan_info)
                 dlg.create().show()

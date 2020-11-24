@@ -2,6 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="courses.projects.edible_eats.UserPreferenceActivity">
+    <item android:id="@+id/profile_name"
+          android:title="Set Profile Name">
+    </item>
 
     <item
         android:id="@+id/diet_description"

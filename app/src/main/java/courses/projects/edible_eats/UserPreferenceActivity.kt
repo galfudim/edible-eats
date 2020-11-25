@@ -39,7 +39,8 @@ class UserPreferenceActivity : AppCompatActivity() {
         // Utilized for diet selection
         val dietOptions = resources.getStringArray(R.array.diets_array)
 
-        dietSelection.setSelection(0,false)
+        // TODO: Default Spinner selection --> Choose A Diet
+
         dietSelection.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 when(dietOptions[position]) {

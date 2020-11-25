@@ -13,9 +13,9 @@ class SearchActivity : AppCompatActivity() {
     private var listView: ListView? = null
     private var adapter: ArrayAdapter<String>? = null
     private var restaurantList: ArrayList<String>? = null
-    private var restaurantsByDiet: HashMap<String, List<String>>? = null
-
-    private val items = mutableListOf<courses.projects.edible_eats.MenuItem>()
+    private var menuChoiceList: ArrayList<MenuChoice>? = null
+    private var restaurantsToMenuChoice: HashMap<String, ArrayList<MenuChoice>>? =
+        HashMap<String, ArrayList<MenuChoice>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,11 +43,14 @@ class SearchActivity : AppCompatActivity() {
                     if (restaurantList!!.contains(query)) {
                         adapter!!.filter.filter(query)
                     } else {
-                        Toast.makeText(this@SearchActivity,"Restaurant Not Found",
-                            Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this@SearchActivity, "Restaurant Not Found",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                     return false
                 }
+
                 override fun onQueryTextChange(newText: String): Boolean {
                     adapter!!.filter.filter(newText)
                     return false
@@ -56,12 +59,6 @@ class SearchActivity : AppCompatActivity() {
 
         return super.onCreateOptionsMenu(menu)
     }
-
-     private fun getItem(): courses.projects.edible_eats.MenuItem =
-         items.removeAt(items.size - 1)
-     private fun addItem(item: courses.projects.edible_eats.MenuItem) {
-         items.add(item)
-     }
 
     private fun populateRestaurantList() {
         restaurantList!!.add("Chipotle")
@@ -84,23 +81,34 @@ class SearchActivity : AppCompatActivity() {
         val diet = intent.getStringExtra(DIET_SELECTION)
         val preferences = intent.getStringArrayListExtra(FOOD_PREFERENCES)
 
+        populateRestaurantToMenuChoicMap(diet!!, preferences!!)
+
         Log.d("DIET", diet!!)
-        for(pref in preferences!!) {
+        for (pref in preferences!!) {
             Log.d("PREFERENCE", pref)
         }
 
         Log.d("COUNT", preferences.size.toString())
     }
 
-    private fun restaurantMappings() {
-        restaurantsByDiet = HashMap<String,  List<String>>()
-//        restaurantsByDiet!!.put("Pescatarian", )
-
+    private fun populateRestaurantToMenuChoicMap(diet: String, preferences: ArrayList<String>) {
+        for (menuChoice in menuChoiceList!!) {
+            if (menuChoice.diet == diet && (menuChoice.preferences!!.intersect(preferences))!!.isNotEmpty()) {
+                var list: ArrayList<MenuChoice> = ArrayList()
+                if (restaurantsToMenuChoice!![menuChoice.restaurantName]!!.isNotEmpty()) {
+                    list = restaurantsToMenuChoice!![menuChoice.restaurantName]!!
+                    list.add(menuChoice)
+                    restaurantsToMenuChoice!!.put(menuChoice.restaurantName!!, list)
+                } else {
+                    list.add(menuChoice)
+                    restaurantsToMenuChoice!!.put(menuChoice.restaurantName!!, list)
+                }
+            }
+        }
     }
 
     companion object {
         const val FOOD_PREFERENCES = "Favorite Food"
         const val DIET_SELECTION = "Diet Preference"
     }
-
 }

@@ -180,7 +180,7 @@ class UserPreferenceActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val FOOD_PREFERENCES = "Favorite Food"
+        const val FOOD_PREFERENCES = "Favorite Foods"
         const val DIET_SELECTION = "Diet Preference"
     }
 }

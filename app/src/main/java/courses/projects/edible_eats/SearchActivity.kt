@@ -13,6 +13,7 @@ class SearchActivity : AppCompatActivity() {
     private var listView: ListView? = null
     private var adapter: ArrayAdapter<String>? = null
     private var restaurantList: ArrayList<String>? = null
+    private var restaurantsByDiet: HashMap<String, List<String>>? = null
 
     private val items = mutableListOf<courses.projects.edible_eats.MenuItem>()
 
@@ -56,15 +57,11 @@ class SearchActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-
      private fun getItem(): courses.projects.edible_eats.MenuItem =
          items.removeAt(items.size - 1)
      private fun addItem(item: courses.projects.edible_eats.MenuItem) {
          items.add(item)
      }
-
-
-
 
     private fun populateRestaurantList() {
         restaurantList!!.add("Chipotle")
@@ -93,6 +90,12 @@ class SearchActivity : AppCompatActivity() {
         }
 
         Log.d("COUNT", preferences.size.toString())
+    }
+
+    private fun restaurantMappings() {
+        restaurantsByDiet = HashMap<String,  List<String>>()
+//        restaurantsByDiet!!.put("Pescatarian", )
+
     }
 
     companion object {

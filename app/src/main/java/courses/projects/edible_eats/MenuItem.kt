@@ -5,10 +5,7 @@ package courses.projects.edible_eats
      var dietPreference: String? = null
      var menuItemsList: ArrayList<String>? = null
 
-
-
-
-    fun constructor(restaurantName: String?,dietPreference: String? , itemName: String?) {
+    fun constructor(restaurantName: String?, dietPreference: String? , itemName: String?) {
         this.restaurantName = restaurantName
         this.dietPreference = dietPreference
         menuItemsList!!.add(itemName!!)

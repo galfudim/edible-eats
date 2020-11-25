@@ -2,10 +2,13 @@ package courses.projects.edible_eats
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
@@ -18,6 +21,8 @@ class UserPreferenceActivity : AppCompatActivity() {
     private var search: Button? = null
     private var dietOption: String? = null
     private var profileName: TextView? = null
+    private var foodOptions: LinearLayout? = null
+    private var select: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +35,8 @@ class UserPreferenceActivity : AppCompatActivity() {
         option4 = findViewById(R.id.option4)
         search = findViewById(R.id.search)
         profileName = findViewById(R.id.profile_name_text)
+        foodOptions = findViewById(R.id.food_options)
+        select = findViewById(R.id.select_text)
 
         // Navigate to Search Activity
         search!!.setOnClickListener {
@@ -40,27 +47,41 @@ class UserPreferenceActivity : AppCompatActivity() {
         val dietOptions = resources.getStringArray(R.array.diets_array)
 
         // TODO: Default Spinner selection --> Choose A Diet
+        dietSelection.setSelection(0,false)
+        select!!.visibility = INVISIBLE
+        foodOptions!!.visibility = INVISIBLE
 
         dietSelection.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                select!!.visibility = VISIBLE
+                foodOptions!!.visibility = VISIBLE
+                var toast = Toast.makeText(
+                    applicationContext, "You selected " + dietOptions[position], Toast.LENGTH_SHORT
+                )
+
                 when(dietOptions[position]) {
+                    "Choose A Diet" -> {
+                        select!!.visibility = INVISIBLE
+                        foodOptions!!.visibility = INVISIBLE
+                        clearSelections()
+                    }
                     "Pescatarian" -> {
                         displayFoods("Fish", "Salad", "Taco", "Fries")
+                        toast.show()
                     }
                     "Vegan" -> {
                         displayFoods("Vegetables", "Salad", "Tofu", "Fruit")
+                        toast.show()
                     }
                     "Vegetarian" -> {
                         displayFoods("Faux meat", "Salad", "Taco", "Fries")
+                        toast.show()
                     }
                     "Ketogenic" -> {
                         displayFoods("Chicken", "Turkey", "Taco", "Beef")
+                        toast.show()
                     }
                 }
-
-                Toast.makeText(
-                    applicationContext, "You selected " + dietOptions[position], Toast.LENGTH_SHORT
-                ).show()
 
                 addDietSelection(dietOptions[position])
             }
@@ -116,9 +137,16 @@ class UserPreferenceActivity : AppCompatActivity() {
     private fun search(){
         var intent = Intent(this@UserPreferenceActivity, SearchActivity::class.java)
         // TODO: put information for what user selected
+        if( dietOption == "Choose A Diet"){
+            Toast.makeText(
+                applicationContext, "Please choose a diet option!", Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
         if(!option1!!.isChecked && !option2!!.isChecked && !option3!!.isChecked && !option4!!.isChecked){
             Toast.makeText(
-                applicationContext, "Please make a selection!", Toast.LENGTH_SHORT
+                applicationContext, "Please select a food preference!", Toast.LENGTH_SHORT
             ).show()
             return
         }

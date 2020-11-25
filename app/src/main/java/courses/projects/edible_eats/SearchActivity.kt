@@ -9,11 +9,12 @@ import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-
 class SearchActivity : AppCompatActivity() {
     private var listView: ListView? = null
     private var adapter: ArrayAdapter<String>? = null
     private var restaurantList: ArrayList<String>? = null
+
+    private val items = mutableListOf<courses.projects.edible_eats.MenuItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +55,16 @@ class SearchActivity : AppCompatActivity() {
 
         return super.onCreateOptionsMenu(menu)
     }
+
+
+     private fun getItem(): courses.projects.edible_eats.MenuItem =
+         items.removeAt(items.size - 1)
+     private fun addItem(item: courses.projects.edible_eats.MenuItem) {
+         items.add(item)
+     }
+
+
+
 
     private fun populateRestaurantList() {
         restaurantList!!.add("Chipotle")

@@ -8,14 +8,15 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.DatabaseReference
 
 class SearchActivity : AppCompatActivity() {
     private var listView: ListView? = null
     private var adapter: ArrayAdapter<String>? = null
     private var restaurantList: ArrayList<String>? = null
     private var menuChoiceList: ArrayList<MenuChoice>? = null
-    private var restaurantsToMenuChoice: HashMap<String, ArrayList<MenuChoice>>? =
-        HashMap<String, ArrayList<MenuChoice>>()
+    private var restaurantsToMenuChoice: HashMap<String, ArrayList<MenuChoice>>? = HashMap()
+    private var mDatabaseReference: DatabaseReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,11 +78,33 @@ class SearchActivity : AppCompatActivity() {
         restaurantList!!.sort()
     }
 
+    private fun populateMenuChoices() {
+        menuChoiceList = ArrayList<MenuChoice>()
+//        mDatabaseReference!!.orderByKey()
+        // Chipotle
+//        menuChoiceList!!.add(MenuChoice("Chipotle", KETOGENIC, "Chicken Keto Salad Bowl", addPreference("Chicken")))
+//        menuChoiceList!!.add(MenuChoice("Chipotle", VEGAN, "Sofritas Vegan Bowl", addPreference("Salad")))
+//        menuChoiceList!!.add(MenuChoice("Chipotle", VEGETARIAN, "Vegetarian Bowl", addPreference("Salad")))
+
+        // SweetGreen
+//        menuChoiceList!!.add(MenuChoice("SweetGreen", PESCATARIAN, "Fish Taco", addPreference("Fish")))
+//        menuChoiceList!!.add(MenuChoice("SweetGreen", PESCATARIAN, "Fish Taco", addPreference("Taco")))
+//        menuChoiceList!!.add(MenuChoice("SweetGreen", VEGAN, "Sofritas Vegan Bowl", addPreference("Salad")))
+//        menuChoiceList!!.add(MenuChoice("SweetGreen", VEGETARIAN, "Vegetarian Bowl", addPreference("Salad")))
+
+    }
+
+    private fun addPreference(pref: String) : ArrayList<String>{
+        var preferences = ArrayList<String>()
+        preferences.add(pref)
+        return preferences
+    }
+
     private fun getFoodPreferences() {
         val diet = intent.getStringExtra(DIET_SELECTION)
         val preferences = intent.getStringArrayListExtra(FOOD_PREFERENCES)
 
-        populateRestaurantToMenuChoicMap(diet!!, preferences!!)
+        populateRestaurantToMenuChoiceMap(diet!!, preferences!!)
 
         Log.d("DIET", diet!!)
         for (pref in preferences!!) {
@@ -91,7 +114,8 @@ class SearchActivity : AppCompatActivity() {
         Log.d("COUNT", preferences.size.toString())
     }
 
-    private fun populateRestaurantToMenuChoicMap(diet: String, preferences: ArrayList<String>) {
+    private fun populateRestaurantToMenuChoiceMap(diet: String, preferences: ArrayList<String>) {
+        populateMenuChoices()
         for (menuChoice in menuChoiceList!!) {
             if (menuChoice.diet == diet && (menuChoice.preferences!!.intersect(preferences))!!.isNotEmpty()) {
                 var list: ArrayList<MenuChoice> = ArrayList()
@@ -108,7 +132,11 @@ class SearchActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val FOOD_PREFERENCES = "Favorite Food"
+        const val FOOD_PREFERENCES = "Favorite Foods"
         const val DIET_SELECTION = "Diet Preference"
+        const val PESCATARIAN = "Pescatarian"
+        const val KETOGENIC = "Ketogenic"
+        const val VEGAN = "Vegan"
+        const val VEGETARIAN = "Vegetarian"
     }
 }

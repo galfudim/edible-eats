@@ -15,8 +15,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class SignInActivity : AppCompatActivity() {
-    private var mDatabaseReference: DatabaseReference? = null
     private var mDatabase: FirebaseDatabase? = null
+    private var mDatabaseReference: DatabaseReference? = null
     private var userEmail: EditText? = null
     private var userPassword: EditText? = null
     private var signInButton: Button? = null

@@ -1,35 +1,41 @@
 package courses.projects.edible_eats
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.*
 
 class SearchActivity : AppCompatActivity() {
+    // Firebase database objects
+    private var mDatabase: FirebaseDatabase? = null
+    private var mDatabaseReferenceMenuChoices: DatabaseReference? = null
+    private var mDatabaseReferenceRestaurants: DatabaseReference? = null
+
+    // Menu-related objects
+    private var menuChoices: ArrayList<MenuChoice>? = null
+    private var restaurants: ArrayList<String>? = null
+    private var restaurantToMenuChoices: HashMap<String, ArrayList<MenuChoice>>? = null
+
+    // View objects
     private var listView: ListView? = null
     private var adapter: ArrayAdapter<String>? = null
-    private var restaurantList: ArrayList<String>? = null
-    private var menuChoiceList: ArrayList<MenuChoice>? = null
-    private var restaurantsToMenuChoice: HashMap<String, ArrayList<MenuChoice>>? = HashMap()
-    private var mDatabaseReference: DatabaseReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
+        mDatabase = FirebaseDatabase.getInstance()
+        menuChoices = getMenuChoices()
+        restaurants = getRestaurants()
+        restaurantToMenuChoices = getRestaurantToMenuChoices()
+
         listView = findViewById(R.id.listView)
-        restaurantList = ArrayList()
-        populateRestaurantList()
-        getFoodPreferences()
-
-        adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, restaurantList!!)
+        adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, restaurants!!)
         listView!!.adapter = adapter
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -41,7 +47,7 @@ class SearchActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(
             object : android.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
-                    if (restaurantList!!.contains(query)) {
+                    if (restaurants!!.contains(query)) {
                         adapter!!.filter.filter(query)
                     } else {
                         Toast.makeText(
@@ -61,82 +67,71 @@ class SearchActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    private fun populateRestaurantList() {
-        restaurantList!!.add("Chipotle")
-        restaurantList!!.add("SweetGreen")
-        restaurantList!!.add("Playa Bowls")
-        restaurantList!!.add("NuVegan Cafe")
-        restaurantList!!.add("Milk & Honey Cafe")
-        restaurantList!!.add("Azteca Restaurant & Cantina")
-        restaurantList!!.add("Marathon Deli")
-        restaurantList!!.add("Saladworks")
-        restaurantList!!.add("Panda Express")
-        restaurantList!!.add("Bagel Place")
-        restaurantList!!.add("Busboys & Poets")
-        restaurantList!!.add("Mamma Lucia")
+    private fun getMenuChoices(): ArrayList<MenuChoice> {
+        val menuChoiceList = ArrayList<MenuChoice>()
 
-        restaurantList!!.sort()
+        mDatabaseReferenceMenuChoices = mDatabase!!.getReference("menuChoices")
+        mDatabaseReferenceMenuChoices!!.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (menuChoiceSnapshot in snapshot.children) {
+                    val menuChoice = menuChoiceSnapshot.getValue(MenuChoice::class.java)
+                    menuChoiceList.add(menuChoice!!)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                throw error.toException()
+            }
+        })
+
+        return menuChoiceList
     }
 
-    private fun populateMenuChoices() {
-        menuChoiceList = ArrayList<MenuChoice>()
-//        mDatabaseReference!!.orderByKey()
-        // Chipotle
-//        menuChoiceList!!.add(MenuChoice("Chipotle", KETOGENIC, "Chicken Keto Salad Bowl", addPreference("Chicken")))
-//        menuChoiceList!!.add(MenuChoice("Chipotle", VEGAN, "Sofritas Vegan Bowl", addPreference("Salad")))
-//        menuChoiceList!!.add(MenuChoice("Chipotle", VEGETARIAN, "Vegetarian Bowl", addPreference("Salad")))
+    private fun getRestaurants(): ArrayList<String> {
+        val restaurantList = ArrayList<String>()
 
-        // SweetGreen
-//        menuChoiceList!!.add(MenuChoice("SweetGreen", PESCATARIAN, "Fish Taco", addPreference("Fish")))
-//        menuChoiceList!!.add(MenuChoice("SweetGreen", PESCATARIAN, "Fish Taco", addPreference("Taco")))
-//        menuChoiceList!!.add(MenuChoice("SweetGreen", VEGAN, "Sofritas Vegan Bowl", addPreference("Salad")))
-//        menuChoiceList!!.add(MenuChoice("SweetGreen", VEGETARIAN, "Vegetarian Bowl", addPreference("Salad")))
+        mDatabaseReferenceRestaurants = mDatabase!!.getReference("restaurants")
+        mDatabaseReferenceRestaurants!!.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (restaurantSnapshot in snapshot.children) {
+                    val restaurant = restaurantSnapshot.value.toString()
+                    restaurantList.add(restaurant)
+                }
+            }
 
+            override fun onCancelled(error: DatabaseError) {
+                throw error.toException()
+            }
+        })
+
+        restaurantList.sort()
+        return restaurantList
     }
 
-    private fun addPreference(pref: String) : ArrayList<String>{
-        var preferences = ArrayList<String>()
-        preferences.add(pref)
-        return preferences
-    }
+    private fun getRestaurantToMenuChoices(): HashMap<String, ArrayList<MenuChoice>> {
+        val diet = intent.getStringExtra(DIET_SELECTION) as String
+        val preferences = intent.getStringArrayListExtra(FOOD_PREFERENCES) as ArrayList<String>
+        val restaurantToMenuChoicesMap = HashMap<String, ArrayList<MenuChoice>>()
 
-    private fun getFoodPreferences() {
-        val diet = intent.getStringExtra(DIET_SELECTION)
-        val preferences = intent.getStringArrayListExtra(FOOD_PREFERENCES)
-
-        populateRestaurantToMenuChoiceMap(diet!!, preferences!!)
-
-        Log.d("DIET", diet!!)
-        for (pref in preferences!!) {
-            Log.d("PREFERENCE", pref)
-        }
-
-        Log.d("COUNT", preferences.size.toString())
-    }
-
-    private fun populateRestaurantToMenuChoiceMap(diet: String, preferences: ArrayList<String>) {
-        populateMenuChoices()
-        for (menuChoice in menuChoiceList!!) {
-            if (menuChoice.diet == diet && (menuChoice.preferences!!.intersect(preferences))!!.isNotEmpty()) {
+        for (menuChoice in menuChoices!!) {
+            if (menuChoice.diet == diet && (menuChoice.preferences!!.intersect(preferences)).isNotEmpty()) {
                 var list: ArrayList<MenuChoice> = ArrayList()
-                if (restaurantsToMenuChoice!![menuChoice.restaurantName]!!.isNotEmpty()) {
-                    list = restaurantsToMenuChoice!![menuChoice.restaurantName]!!
+                if (restaurantToMenuChoicesMap!![menuChoice.restaurantName]!!.isNotEmpty()) {
+                    list = restaurantToMenuChoicesMap!![menuChoice.restaurantName]!!
                     list.add(menuChoice)
-                    restaurantsToMenuChoice!!.put(menuChoice.restaurantName!!, list)
+                    restaurantToMenuChoicesMap!![menuChoice.restaurantName!!] = list
                 } else {
                     list.add(menuChoice)
-                    restaurantsToMenuChoice!!.put(menuChoice.restaurantName!!, list)
+                    restaurantToMenuChoicesMap!![menuChoice.restaurantName!!] = list
                 }
             }
         }
+
+        return restaurantToMenuChoicesMap
     }
 
     companion object {
         const val FOOD_PREFERENCES = "Favorite Foods"
         const val DIET_SELECTION = "Diet Preference"
-        const val PESCATARIAN = "Pescatarian"
-        const val KETOGENIC = "Ketogenic"
-        const val VEGAN = "Vegan"
-        const val VEGETARIAN = "Vegetarian"
     }
 }

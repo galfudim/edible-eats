@@ -93,7 +93,7 @@ class UserPreferenceActivity : AppCompatActivity() {
 
     }
 
-    private fun displayFoods(food1:String, food2:String, food3:String, food4:String) {
+    private fun displayFoods(food1: String, food2: String, food3: String, food4: String) {
         clearSelections()
         option1!!.text = food1
         option2!!.text = food2

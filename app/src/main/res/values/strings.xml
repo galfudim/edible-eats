@@ -4,7 +4,7 @@
 
     <!--  Strings used for diet spinner  -->
     <string-array name="diets_array">
-        <item>Choose A Diet</item>
+        <item>Select a diet...</item>
         <item>Pescatarian</item>
         <item>Vegan</item>
         <item>Vegetarian</item>

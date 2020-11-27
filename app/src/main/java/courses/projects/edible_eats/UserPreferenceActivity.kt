@@ -46,7 +46,7 @@ class UserPreferenceActivity : AppCompatActivity() {
         // Utilized for diet selection
         val dietOptions = resources.getStringArray(R.array.diets_array)
 
-        // TODO: Default Spinner selection --> Choose A Diet
+        // Default Spinner selection
         dietSelection.setSelection(0,false)
         select!!.visibility = INVISIBLE
         foodOptions!!.visibility = INVISIBLE
@@ -136,7 +136,7 @@ class UserPreferenceActivity : AppCompatActivity() {
 
     private fun search(){
         var intent = Intent(this@UserPreferenceActivity, SearchActivity::class.java)
-        // TODO: put information for what user selected
+        // Validate selection
         if( dietOption == "Choose A Diet"){
             Toast.makeText(
                 applicationContext, "Please choose a diet option!", Toast.LENGTH_SHORT
@@ -150,6 +150,8 @@ class UserPreferenceActivity : AppCompatActivity() {
             ).show()
             return
         }
+
+        // Send information for what user selected
         intent.putExtra(DIET_SELECTION, dietOption)
         intent.putExtra(FOOD_PREFERENCES, addFoodPreferences())
         startActivity(intent)

@@ -20,14 +20,14 @@
         android:layout_height="wrap_content"
         android:textSize="24dp"
         android:layout_marginBottom="44dp"
-        android:textColor="#E48C0B"
+        android:textColor="@color/main_orange"
         android:text="@string/hi_there"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textColor="#E7686E"
+        android:textColor="@color/main_pink"
         android:text="@string/email"/>
 
     <EditText
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textColor="#E7686E"
+        android:textColor="@color/main_pink"
         android:text="@string/password"/>
 
     <EditText

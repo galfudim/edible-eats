@@ -35,15 +35,15 @@ class SearchActivity : AppCompatActivity() {
         listView = findViewById(R.id.listView)
         adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
 
-        var pDialog = ProgressDialog.show(
+        //  Progress Dialog to simulate retrieving data
+        var mProgress = ProgressDialog.show(
             this, "Loading Eateries!",
             "Restaurants are loading. Please wait.", false
         )
 
-        // Loading data from database
         val handler = Handler()
-        handler.postDelayed(Runnable { pDialog.dismiss() }, 2000)
 
+        // Loading data from database
         if(menuChoices!!.isEmpty()) {
             readMenuChoiceData(object : MenuChoiceCallback {
                 override fun onCallbackMenuChoice(value: MenuChoice) {
@@ -59,6 +59,7 @@ class SearchActivity : AppCompatActivity() {
                     listView!!.setOnItemClickListener { adapterView, view, i, l ->
 
                     }
+                    handler.postDelayed(Runnable { mProgress.dismiss() }, 2000)
                     listView!!.adapter = adapter
                 }
             })
@@ -156,8 +157,8 @@ class SearchActivity : AppCompatActivity() {
     companion object {
         const val FOOD_PREFERENCES = "Favorite Foods"
         const val DIET_SELECTION = "Diet Preference"
-        // TODO (Gal) Update this value when all choices in DB
-        const val ALL_CHOICES_LOADED = 15
+        // TODO Update this value -> 44
+        const val ALL_CHOICES_LOADED = 32
     }
 }
 

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="@string/pick_your_preferences"
         android:layout_marginBottom="88dp"
-        android:textColor="#E48C0B"
+        android:textColor="@color/main_orange"
         android:textSize="40dp"
         android:textStyle="bold" />
 
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/what_is_your_diet"
-        android:textColor="#E7686E"
+        android:textColor="@color/main_pink"
         android:textSize="36dp"
         android:textStyle="bold" />
 
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/select_your_favorite_foods"
-        android:textColor="#E7686E"
+        android:textColor="@color/main_pink"
         android:textSize="24dp"
         android:textStyle="bold" />
 

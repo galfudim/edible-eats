@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="36dp"
-        android:textColor="#E7686E"
+        android:textColor="@color/main_pink"
         android:layout_gravity="center"
         android:textStyle="bold"
         android:text="@string/edible_eats"/>

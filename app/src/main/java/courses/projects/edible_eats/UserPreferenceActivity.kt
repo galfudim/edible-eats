@@ -176,7 +176,7 @@ class UserPreferenceActivity : AppCompatActivity() {
 
                 dlg.setPositiveButton("Done") { _, _ ->
                     val name = profile.text.toString()
-                    profileName!!.text = profileName!!.text.toString() + ", " + name
+                    profileName!!.text = profileName!!.text.toString() + ", " + name + "!"
                 }
 
                 dlg.setNegativeButton("Cancel") { _, _ ->

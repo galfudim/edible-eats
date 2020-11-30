@@ -36,12 +36,12 @@ class SearchActivity : AppCompatActivity() {
         adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
 
         //  Progress Dialog to simulate retrieving data
-        var mProgress = ProgressDialog.show(
-            this, "Loading Eateries!",
-            "Restaurants are loading. Please wait.", false
-        )
+//        var mProgress = ProgressDialog.show(
+//            this, "Loading Eateries!",
+//            "Restaurants are loading. Please wait.", false
+//        )
 
-        val handler = Handler()
+        //val handler = Handler()
 
         // Loading data from database
         if (menuChoices!!.isEmpty()) {
@@ -57,9 +57,11 @@ class SearchActivity : AppCompatActivity() {
                     // TODO (Aimon) onClick go to ListActivity via intent to populate menuChoices,
                     //  iterate though values to get menuChoices for each restaurant
                     listView!!.setOnItemClickListener { adapterView, view, i, l ->
-
+                        //val intent = Intent(this@SearchActivity, ListActivity::class.java)
+//                        intent.putExtra("RestaurantName", listView.getItemAtPosition(i).toString())
+//                        startActivity(intent)
                     }
-                    handler.postDelayed(Runnable { mProgress.dismiss() }, 2000)
+                    //handler.postDelayed(Runnable { mProgress.dismiss() }, 2000)
                     listView!!.adapter = adapter
                 }
             })

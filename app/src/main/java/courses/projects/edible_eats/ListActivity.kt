@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 class ListActivity : AppCompatActivity() {
     var listView: ListView? = null
      var restNames: ArrayList<String> =ArrayList<String>()
+    var choicesList: ArrayList<String> =ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,11 +21,14 @@ class ListActivity : AppCompatActivity() {
         val mBundle = intent.extras
         if (mBundle != null) {
             val rest = mBundle.getString("RestaurantName")
-            restNames.add(rest!!)
+            val menuChoicesList = mBundle.getStringArrayList("MenuChoices")
+            //restNames.add(rest!!)
+            choicesList = menuChoicesList!!
+
 
 
         }
-        val mAdapter =  ArrayAdapter<String>(this@ListActivity, android.R.layout.simple_list_item_1, restNames)
+        val mAdapter =  ArrayAdapter<String>(this@ListActivity, android.R.layout.simple_list_item_1, choicesList)
         listView!!.adapter = mAdapter
     }
 }

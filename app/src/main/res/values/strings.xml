@@ -45,7 +45,7 @@
 
     <!--  Used for Sliding Images  -->
     <string-array name="images_array">
-        <item>@drawable/bbp</item>
+        <item>@drawable/busboys_blackened_salmon</item>
         <item>@drawable/saladworks</item>
         <item>@drawable/playa_bowls</item>
         <item>@drawable/panda_express_honey_walnut_shrimp</item>

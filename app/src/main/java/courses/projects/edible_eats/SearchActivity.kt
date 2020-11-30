@@ -1,10 +1,10 @@
 package courses.projects.edible_eats
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-//import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
@@ -45,8 +45,11 @@ class SearchActivity : AppCompatActivity() {
 
         // Loading data from database
         if (menuChoices!!.isEmpty()) {
+
+
             readMenuChoiceData(object : MenuChoiceCallback {
                 override fun onCallbackMenuChoice(value: MenuChoice) {
+                    Log.i("Search activity", "menu choice is empty")
                     // For every menuChoice in DB add to list
                     // Once all choices loaded, filter based on restaurant & choices
                     menuChoices!!.add(value)
@@ -54,17 +57,22 @@ class SearchActivity : AppCompatActivity() {
                     val filteredRestaurants = getRestaurantToMenuChoices()
                     adapter!!.addAll(filteredRestaurants!!.keys.toList().distinct())
 
+
                     // TODO (Aimon) onClick go to ListActivity via intent to populate menuChoices,
                     //  iterate though values to get menuChoices for each restaurant
                     listView!!.setOnItemClickListener { adapterView, view, i, l ->
-                        //val intent = Intent(this@SearchActivity, ListActivity::class.java)
-//                        intent.putExtra("RestaurantName", listView.getItemAtPosition(i).toString())
-//                        startActivity(intent)
+                        val intent = Intent(this@SearchActivity, ListActivity::class.java)
+                        intent.putExtra("RestaurantName", listView!!.getItemAtPosition(i).toString())
+                        intent.putExtra("MenuChoices", filteredRestaurants.get( listView!!.getItemAtPosition(i).toString()))
+
+                       startActivity(intent)
                     }
                     //handler.postDelayed(Runnable { mProgress.dismiss() }, 2000)
                     listView!!.adapter = adapter
                 }
+
             })
+
         }
     }
 
@@ -130,7 +138,9 @@ class SearchActivity : AppCompatActivity() {
                 ALL_CHOICES_LOADED = dataSnapshot.children.count()
 
                 for (menuChoiceSnapshot in dataSnapshot.children) {
+
                     val menuChoice = menuChoiceSnapshot.getValue(MenuChoice::class.java)
+                    Log.i("Search activity", menuChoice!!.name.toString())
                     callback.onCallbackMenuChoice(menuChoice!!)
                 }
             }

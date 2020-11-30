@@ -53,7 +53,7 @@ class SearchActivity : AppCompatActivity() {
                     menuChoices!!.add(value)
                     restaurantToMenuChoices!!.clear()
                     val filteredRestaurants = getRestaurantToMenuChoices()
-                    adapter!!.addAll(filteredRestaurants!!.keys.toList().distinct())
+                    adapter!!.addAll(filteredRestaurants!!.keys.toList().distinct().sorted())
 
                     // Fetch data progress and populate list
                     handler.postDelayed(Runnable { mProgress.dismiss() }, 1000)

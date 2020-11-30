@@ -22,6 +22,7 @@ class SearchActivity : AppCompatActivity() {
     // Menu-related objects
     private var menuChoices: ArrayList<MenuChoice>? = ArrayList<MenuChoice>()
     private var restaurantToMenuChoices: HashMap<String, ArrayList<MenuChoice>>? = HashMap<String, ArrayList<MenuChoice>>()
+    private var filtered: ArrayList<String>? = ArrayList<String>()
 
     // View objects
     private var listView: ListView? = null
@@ -36,20 +37,17 @@ class SearchActivity : AppCompatActivity() {
         adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
 
         //  Progress Dialog to simulate retrieving data
-//        var mProgress = ProgressDialog.show(
-//            this, "Loading Eateries!",
-//            "Restaurants are loading. Please wait.", false
-//        )
+        var mProgress = ProgressDialog.show(
+            this, "Loading Eateries!",
+            "Restaurants are loading. Please wait.", false
+        )
 
-        //val handler = Handler()
+        val handler = Handler()
 
         // Loading data from database
         if (menuChoices!!.isEmpty()) {
-
-
             readMenuChoiceData(object : MenuChoiceCallback {
                 override fun onCallbackMenuChoice(value: MenuChoice) {
-                    Log.i("Search activity", "menu choice is empty")
                     // For every menuChoice in DB add to list
                     // Once all choices loaded, filter based on restaurant & choices
                     menuChoices!!.add(value)
@@ -57,18 +55,23 @@ class SearchActivity : AppCompatActivity() {
                     val filteredRestaurants = getRestaurantToMenuChoices()
                     adapter!!.addAll(filteredRestaurants!!.keys.toList().distinct())
 
+                    // Fetch data progress and populate list
+                    handler.postDelayed(Runnable { mProgress.dismiss() }, 1000)
+                    listView!!.adapter = adapter
 
-                    // TODO (Aimon) onClick go to ListActivity via intent to populate menuChoices,
+                    //  onClick go to ListActivity via intent to populate menuChoices,
                     //  iterate though values to get menuChoices for each restaurant
                     listView!!.setOnItemClickListener { adapterView, view, i, l ->
                         val intent = Intent(this@SearchActivity, ListActivity::class.java)
-                        intent.putExtra("RestaurantName", listView!!.getItemAtPosition(i).toString())
-                        intent.putExtra("MenuChoices", filteredRestaurants.get( listView!!.getItemAtPosition(i).toString()))
-
-                       startActivity(intent)
+                        val restaurantName = listView!!.getItemAtPosition(i).toString()
+                        intent.putExtra("RestaurantName", restaurantName )
+                        filtered!!.clear()
+                        for(choice in filteredRestaurants[restaurantName]!!){
+                            choice.name?.let { filtered!!.add(it) }
+                        }
+                        intent.putExtra("MenuChoice Names", filtered)
+                        startActivity(intent)
                     }
-                    //handler.postDelayed(Runnable { mProgress.dismiss() }, 2000)
-                    listView!!.adapter = adapter
                 }
 
             })
@@ -140,7 +143,6 @@ class SearchActivity : AppCompatActivity() {
                 for (menuChoiceSnapshot in dataSnapshot.children) {
 
                     val menuChoice = menuChoiceSnapshot.getValue(MenuChoice::class.java)
-                    Log.i("Search activity", menuChoice!!.name.toString())
                     callback.onCallbackMenuChoice(menuChoice!!)
                 }
             }

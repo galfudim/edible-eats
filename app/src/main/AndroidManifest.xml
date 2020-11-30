@@ -35,6 +35,7 @@
         </activity>
         <activity android:name=".SearchActivity"
             android:label=" "/>
+        <activity android:name=".ListActivity" />
     </application>
 
 </manifest>

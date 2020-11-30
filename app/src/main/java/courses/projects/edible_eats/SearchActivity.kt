@@ -3,6 +3,7 @@ package courses.projects.edible_eats
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 //import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -124,6 +125,8 @@ class SearchActivity : AppCompatActivity() {
         mDatabaseReferenceMenuChoices = mDatabase!!.reference.child("menuChoices")
         mDatabaseReferenceMenuChoices!!.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                ALL_CHOICES_LOADED = dataSnapshot.children.count()
+
                 for (menuChoiceSnapshot in dataSnapshot.children) {
                     val menuChoice = menuChoiceSnapshot.getValue(MenuChoice::class.java)
                     callback.onCallbackMenuChoice(menuChoice!!)
@@ -139,7 +142,6 @@ class SearchActivity : AppCompatActivity() {
     companion object {
         const val FOOD_PREFERENCES = "Favorite Foods"
         const val DIET_SELECTION = "Diet Preference"
-        // TODO Update this value dynamically
-        const val ALL_CHOICES_LOADED = 50
+        var ALL_CHOICES_LOADED = -1
     }
 }

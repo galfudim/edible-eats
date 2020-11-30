@@ -2,8 +2,8 @@ package courses.projects.edible_eats
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
+import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -11,6 +11,9 @@ import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager2.widget.ViewPager2
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class UserPreferenceActivity : AppCompatActivity() {
@@ -23,6 +26,9 @@ class UserPreferenceActivity : AppCompatActivity() {
     private var profileName: TextView? = null
     private var foodOptions: LinearLayout? = null
     private var select: TextView? = null
+    private var imagesArray: Array<String>? = null
+    private var currentPage = 0
+    private var viewPager: ViewPager2? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +43,10 @@ class UserPreferenceActivity : AppCompatActivity() {
         profileName = findViewById(R.id.profile_name_text)
         foodOptions = findViewById(R.id.food_options)
         select = findViewById(R.id.select_text)
+        viewPager = findViewById(R.id.viewPager)
+
+        // Sliding images view
+        updateViewPager()
 
         // Navigate to Search Activity
         search!!.setOnClickListener {
@@ -48,6 +58,7 @@ class UserPreferenceActivity : AppCompatActivity() {
 
         // Default Spinner selection
         dietSelection.setSelection(0,false)
+        addDietSelection(SELECT)
         select!!.visibility = INVISIBLE
         foodOptions!!.visibility = INVISIBLE
 
@@ -60,7 +71,7 @@ class UserPreferenceActivity : AppCompatActivity() {
                 )
 
                 when(dietOptions[position]) {
-                    "Choose A Diet" -> {
+                    SELECT -> {
                         select!!.visibility = INVISIBLE
                         foodOptions!!.visibility = INVISIBLE
                         clearSelections()
@@ -137,7 +148,7 @@ class UserPreferenceActivity : AppCompatActivity() {
     private fun search(){
         var intent = Intent(this@UserPreferenceActivity, SearchActivity::class.java)
         // Validate selection
-        if( dietOption == "Choose A Diet"){
+        if( dietOption == SELECT){
             Toast.makeText(
                 applicationContext, "Please choose a diet option!", Toast.LENGTH_SHORT
             ).show()
@@ -210,8 +221,35 @@ class UserPreferenceActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateViewPager() {
+        imagesArray = resources.getStringArray(R.array.images_array)
+
+        val landingImagesAdapter = CustomImageSlidingAdapter(this, imagesArray!!.size)
+        viewPager?.apply {
+            adapter = landingImagesAdapter
+        }
+
+        val handler = Handler()
+        val update = Runnable {
+            if (currentPage == imagesArray!!.size) {
+                currentPage = 0
+            }
+
+            // Scroll to next item
+            viewPager!!.setCurrentItem(currentPage++, true)
+        }
+
+        Timer().schedule(object : TimerTask() {
+            override fun run() {
+                handler.post(update)
+            }
+        }, 3500, 3500)
+    }
+
+
     companion object {
         const val FOOD_PREFERENCES = "Favorite Foods"
         const val DIET_SELECTION = "Diet Preference"
+        const val SELECT = "Select a diet..."
     }
 }

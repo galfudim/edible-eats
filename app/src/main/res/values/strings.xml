@@ -43,6 +43,13 @@
     <string name="select_your_favorite_foods">Select your favorite foods:</string>
     <string name="find_those_eateries">Find those Eateries!</string>
 
+    <!--  Used for Sliding Images  -->
+    <string-array name="images_array">
+        <item>@drawable/busboys_blackened_salmon</item>
+        <item>@drawable/saladworks</item>
+        <item>@drawable/playa_bowls</item>
+        <item>@drawable/panda_express_honey_walnut_shrimp</item>
+    </string-array>
 
 
 </resources>

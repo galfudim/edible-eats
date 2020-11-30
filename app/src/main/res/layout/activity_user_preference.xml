@@ -13,10 +13,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/pick_your_preferences"
-        android:layout_marginBottom="88dp"
+        android:layout_marginBottom="28dp"
         android:textColor="@color/main_orange"
         android:textSize="40dp"
         android:textStyle="bold" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -46,7 +56,7 @@
         android:id="@+id/food_options"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_marginBottom="98dp"
+        android:layout_marginBottom="68dp"
         android:orientation="horizontal">
 
         <CheckBox
@@ -78,7 +88,6 @@
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
         android:background="@drawable/custom_btn"
         android:text="@string/find_those_eateries"
         android:textColor="@color/white"

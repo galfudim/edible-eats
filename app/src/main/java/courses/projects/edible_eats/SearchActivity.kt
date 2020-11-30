@@ -157,8 +157,8 @@ class SearchActivity : AppCompatActivity() {
     companion object {
         const val FOOD_PREFERENCES = "Favorite Foods"
         const val DIET_SELECTION = "Diet Preference"
-        // TODO Update this value -> 44
-        const val ALL_CHOICES_LOADED = 32
+        // TODO Update this value dynamically
+        const val ALL_CHOICES_LOADED = 50
     }
 }
 

@@ -3,7 +3,7 @@ package courses.projects.edible_eats
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
+//import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.*
 
 @Suppress("DEPRECATION")
-
 class SearchActivity : AppCompatActivity() {
     // Firebase database objects
     private var mDatabase: FirebaseDatabase? = null
@@ -44,7 +43,7 @@ class SearchActivity : AppCompatActivity() {
         val handler = Handler()
 
         // Loading data from database
-        if(menuChoices!!.isEmpty()) {
+        if (menuChoices!!.isEmpty()) {
             readMenuChoiceData(object : MenuChoiceCallback {
                 override fun onCallbackMenuChoice(value: MenuChoice) {
                     // For every menuChoice in DB add to list
@@ -54,8 +53,8 @@ class SearchActivity : AppCompatActivity() {
                     val filteredRestaurants = getRestaurantToMenuChoices()
                     adapter!!.addAll(filteredRestaurants!!.keys.toList().distinct())
 
-                    // TODO (Aimon) onClick go to ListActivity via intent to populate menuChoices
-                    // TODO iterate though values to get menuChoices for each restaurant
+                    // TODO (Aimon) onClick go to ListActivity via intent to populate menuChoices,
+                    //  iterate though values to get menuChoices for each restaurant
                     listView!!.setOnItemClickListener { adapterView, view, i, l ->
 
                     }
@@ -71,7 +70,7 @@ class SearchActivity : AppCompatActivity() {
 
         val searchViewItem: MenuItem = menu.findItem(R.id.search_bar)
         val searchView = searchViewItem.actionView as android.widget.SearchView
-        searchView.queryHint = "Search Restaurants";
+        searchView.queryHint = "Search Restaurants"
         searchView.setOnQueryTextListener(
             object : android.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
@@ -91,7 +90,6 @@ class SearchActivity : AppCompatActivity() {
                     return false
                 }
             })
-
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -99,40 +97,24 @@ class SearchActivity : AppCompatActivity() {
         val diet = intent.getStringExtra(DIET_SELECTION) as String
         val preferences = intent.getStringArrayListExtra(FOOD_PREFERENCES) as ArrayList<String>
 
-        if(menuChoices!!.size == ALL_CHOICES_LOADED) {
+        if (menuChoices!!.size == ALL_CHOICES_LOADED) {
             for (menuChoice in menuChoices!!) {
                 if (menuChoice.diet == diet && (menuChoice.preferences!!.intersect(preferences)).isNotEmpty()) {
                     var list: ArrayList<MenuChoice> = ArrayList()
-                    Log.d(
-                        "MENU CHOICE FOUND ",
-                        menuChoice.restaurantName + " -> " + menuChoice.choiceName
-                    )
 
-                    if(restaurantToMenuChoices!![menuChoice.restaurantName] == null ) {
-                        restaurantToMenuChoices!![menuChoice.restaurantName.toString()] = list
+                    if (restaurantToMenuChoices!![menuChoice.restaurant] == null ) {
+                        restaurantToMenuChoices!![menuChoice.restaurant.toString()] = list
                     }
-
-                    if (restaurantToMenuChoices!![menuChoice.restaurantName]!!.isNotEmpty()) {
-                        list = restaurantToMenuChoices!![menuChoice.restaurantName]!!
+                    if (restaurantToMenuChoices!![menuChoice.restaurant]!!.isNotEmpty()) {
+                        list = restaurantToMenuChoices!![menuChoice.restaurant]!!
                         list.add(menuChoice)
-                        restaurantToMenuChoices!![menuChoice.restaurantName!!] = list
+                        restaurantToMenuChoices!![menuChoice.restaurant!!] = list
                     } else {
                         list.add(menuChoice)
-                        restaurantToMenuChoices!![menuChoice.restaurantName!!] = list
+                        restaurantToMenuChoices!![menuChoice.restaurant!!] = list
                     }
                 }
             }
-
-
-            for (item in restaurantToMenuChoices!!.entries) {
-                Log.d("MAP KEY", item.key)
-                for (ch in item.value.toList()) {
-                    Log.d("MAP VALUE", ch.choiceName.toString())
-                }
-
-            }
-
-            Log.d("MAP SIZE", restaurantToMenuChoices!!.size.toString())
         }
 
         return restaurantToMenuChoices
@@ -140,7 +122,7 @@ class SearchActivity : AppCompatActivity() {
 
     private fun readMenuChoiceData(callback: MenuChoiceCallback) {
         mDatabaseReferenceMenuChoices = mDatabase!!.reference.child("menuChoices")
-        mDatabaseReferenceMenuChoices!!.addListenerForSingleValueEvent(object : ValueEventListener {
+        mDatabaseReferenceMenuChoices!!.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (menuChoiceSnapshot in dataSnapshot.children) {
                     val menuChoice = menuChoiceSnapshot.getValue(MenuChoice::class.java)
@@ -157,11 +139,7 @@ class SearchActivity : AppCompatActivity() {
     companion object {
         const val FOOD_PREFERENCES = "Favorite Foods"
         const val DIET_SELECTION = "Diet Preference"
-        // TODO Update this value -> 44
-        const val ALL_CHOICES_LOADED = 32
+        // TODO Update this value to be retrieved dynamically
+        const val ALL_CHOICES_LOADED = 50
     }
-}
-
-interface MenuChoiceCallback {
-    fun onCallbackMenuChoice(value: MenuChoice)
 }

@@ -1,48 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_vertical"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".HomeActivity">
+    android:padding="36dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="36dp"
-        android:textColor="@color/main_pink"
-        android:layout_gravity="center"
-        android:textStyle="bold"
-        android:text="@string/edible_eats"/>
-
-    <TextView
-        android:layout_width="152dp"
-        android:layout_height="158dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="150dp"
-        android:background="@drawable/cutlery" />
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/sign_in"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/custom_btn"
-        android:textColor="@color/white"
-        android:layout_marginBottom="36dp"
-        android:text="@string/sign_in"
-        android:textStyle="bold"/>
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context=".HomeActivity">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/sign_up"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/custom_btn"
-        android:textColor="@color/white"
-        android:layout_marginBottom="36dp"
-        android:text="@string/sign_up"
-        android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="36dp"
+            android:textColor="@color/main_pink"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:text="@string/edible_eats"/>
 
-</LinearLayout>
+        <TextView
+            android:layout_width="152dp"
+            android:layout_height="158dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="150dp"
+            android:background="@drawable/cutlery" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sign_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
+            android:textColor="@color/white"
+            android:layout_marginBottom="36dp"
+            android:text="@string/sign_in"
+            android:textStyle="bold"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_btn"
+            android:textColor="@color/white"
+            android:layout_marginBottom="16dp"
+            android:text="@string/sign_up"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+</ScrollView>

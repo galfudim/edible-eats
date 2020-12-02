@@ -37,10 +37,10 @@ class SearchActivity : AppCompatActivity() {
         adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
 
         //  Progress Dialog to simulate retrieving data
-        var mProgress = ProgressDialog.show(
-            this, "Loading Eateries!",
-            "Restaurants are loading. Please wait.", false
-        )
+//        var mProgress = ProgressDialog.show(
+//            this, "Loading Eateries!",
+//            "Restaurants are loading. Please wait.", false
+//        )
 
         val handler = Handler()
 
@@ -56,7 +56,7 @@ class SearchActivity : AppCompatActivity() {
                     adapter!!.addAll(filteredRestaurants!!.keys.toList().distinct().sorted())
 
                     // Fetch data progress and populate list
-                    handler.postDelayed(Runnable { mProgress.dismiss() }, 1000)
+                    //handler.postDelayed(Runnable { mProgress.dismiss() }, 1000)
                     listView!!.adapter = adapter
 
                     //  onClick go to ListActivity via intent to populate menuChoices,

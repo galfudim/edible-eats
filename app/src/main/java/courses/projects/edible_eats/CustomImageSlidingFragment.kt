@@ -21,6 +21,7 @@ class CustomImageSlidingFragment : Fragment(R.layout.fragment_sliding_image) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val position = requireArguments().getInt(ARG_POSITION)
         val icons = requireContext().resources.obtainTypedArray(R.array.images_array)
-        view.findViewById<ImageView>(R.id.sliding_image).setImageDrawable(icons.getDrawable(position))
+        view.findViewById<ImageView>(R.id.sliding_image)
+            .setImageDrawable(icons.getDrawable(position))
     }
 }

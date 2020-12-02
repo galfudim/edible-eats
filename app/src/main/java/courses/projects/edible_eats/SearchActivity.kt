@@ -20,7 +20,8 @@ class SearchActivity : AppCompatActivity() {
 
     // Menu-related objects
     private var menuChoices: ArrayList<MenuChoice>? = ArrayList<MenuChoice>()
-    private var restaurantToMenuChoices: HashMap<String, ArrayList<MenuChoice>>? = HashMap<String, ArrayList<MenuChoice>>()
+    private var restaurantToMenuChoices: HashMap<String, ArrayList<MenuChoice>>? =
+        HashMap<String, ArrayList<MenuChoice>>()
     private var filtered: ArrayList<String>? = ArrayList<String>()
     private var dataLoaded: Boolean? = false
 
@@ -39,7 +40,7 @@ class SearchActivity : AppCompatActivity() {
         mAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
 
         //  Progress Dialog to simulate retrieving data
-        if(!dataLoaded!!){
+        if (!dataLoaded!!) {
             mProgress = ProgressDialog.show(
                 this, "Loading Eateries!",
                 "Restaurants are loading. Please wait.", false
@@ -69,9 +70,9 @@ class SearchActivity : AppCompatActivity() {
                     mListView!!.setOnItemClickListener { adapterView, view, i, l ->
                         val intent = Intent(this@SearchActivity, ListActivity::class.java)
                         val restaurantName = mListView!!.getItemAtPosition(i).toString()
-                        intent.putExtra(RESTAURANT, restaurantName )
+                        intent.putExtra(RESTAURANT, restaurantName)
                         filtered!!.clear()
-                        for(choice in filteredRestaurants[restaurantName]!!){
+                        for (choice in filteredRestaurants[restaurantName]!!) {
                             choice.name?.let { filtered!!.add(it) }
                         }
                         intent.putExtra(MENU_CHOICES, filtered)
@@ -121,7 +122,7 @@ class SearchActivity : AppCompatActivity() {
                 if (menuChoice.diet == diet && (menuChoice.preferences!!.intersect(preferences)).isNotEmpty()) {
                     var list: ArrayList<MenuChoice> = ArrayList()
 
-                    if (restaurantToMenuChoices!![menuChoice.restaurant] == null ) {
+                    if (restaurantToMenuChoices!![menuChoice.restaurant] == null) {
                         restaurantToMenuChoices!![menuChoice.restaurant.toString()] = list
                     }
                     if (restaurantToMenuChoices!![menuChoice.restaurant]!!.isNotEmpty()) {
@@ -141,7 +142,7 @@ class SearchActivity : AppCompatActivity() {
 
     private fun readMenuChoiceData(callback: MenuChoiceCallback) {
         mDatabaseReferenceMenuChoices = mDatabase!!.reference.child("menuChoices")
-        mDatabaseReferenceMenuChoices!!.addListenerForSingleValueEvent(object: ValueEventListener {
+        mDatabaseReferenceMenuChoices!!.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 ALL_CHOICES_LOADED = dataSnapshot.children.count()
 

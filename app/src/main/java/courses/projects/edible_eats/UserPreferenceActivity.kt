@@ -57,20 +57,25 @@ class UserPreferenceActivity : AppCompatActivity() {
         val dietOptions = resources.getStringArray(R.array.diets_array)
 
         // Default Spinner selection
-        dietSelection.setSelection(0,false)
+        dietSelection.setSelection(0, false)
         addDietSelection(SELECT)
         select!!.visibility = INVISIBLE
         foodOptions!!.visibility = INVISIBLE
 
         dietSelection.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
                 select!!.visibility = VISIBLE
                 foodOptions!!.visibility = VISIBLE
                 var toast = Toast.makeText(
                     applicationContext, "You selected " + dietOptions[position], Toast.LENGTH_SHORT
                 )
 
-                when(dietOptions[position]) {
+                when (dietOptions[position]) {
                     SELECT -> {
                         select!!.visibility = INVISIBLE
                         foodOptions!!.visibility = INVISIBLE
@@ -122,19 +127,19 @@ class UserPreferenceActivity : AppCompatActivity() {
     private fun addFoodPreferences(): ArrayList<String> {
         var foodPreferences = ArrayList<String>()
 
-        if(option1!!.isChecked){
+        if (option1!!.isChecked) {
             foodPreferences.add(option1!!.text as String)
         }
 
-        if(option2!!.isChecked){
+        if (option2!!.isChecked) {
             foodPreferences.add(option2!!.text as String)
         }
 
-        if(option3!!.isChecked){
+        if (option3!!.isChecked) {
             foodPreferences.add(option3!!.text as String)
         }
 
-        if(option4!!.isChecked){
+        if (option4!!.isChecked) {
             foodPreferences.add(option4!!.text as String)
         }
 
@@ -145,17 +150,17 @@ class UserPreferenceActivity : AppCompatActivity() {
         dietOption = option
     }
 
-    private fun search(){
+    private fun search() {
         var intent = Intent(this@UserPreferenceActivity, SearchActivity::class.java)
         // Validate selection
-        if( dietOption == SELECT){
+        if (dietOption == SELECT) {
             Toast.makeText(
                 applicationContext, "Please choose a diet option!", Toast.LENGTH_SHORT
             ).show()
             return
         }
 
-        if(!option1!!.isChecked && !option2!!.isChecked && !option3!!.isChecked && !option4!!.isChecked){
+        if (!option1!!.isChecked && !option2!!.isChecked && !option3!!.isChecked && !option4!!.isChecked) {
             Toast.makeText(
                 applicationContext, "Please select a food preference!", Toast.LENGTH_SHORT
             ).show()
@@ -174,7 +179,7 @@ class UserPreferenceActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val dlg: AlertDialog.Builder =  AlertDialog.Builder(this)
+        val dlg: AlertDialog.Builder = AlertDialog.Builder(this)
 
         when (item.itemId) {
             R.id.profile_name -> {

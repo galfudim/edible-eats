@@ -42,30 +42,34 @@ class SignUpActivity : AppCompatActivity() {
         val password: String = passwordTV!!.text.toString()
 
         if (!validator.validEmail(email)) {
-            Toast.makeText(applicationContext, "Please enter a valid email", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, "Please enter a valid email", Toast.LENGTH_LONG)
+                .show()
             return
         }
 
         if (!validator.validPassword(password)) {
-            Toast.makeText(applicationContext,
+            Toast.makeText(
+                applicationContext,
                 "Please enter a valid password (at least 6 characters with 1 letter and 1 " +
-                        "number", Toast.LENGTH_LONG).show()
+                        "number", Toast.LENGTH_LONG
+            ).show()
             return
         }
 
-        mAuth!!.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
-            if (task.isSuccessful) {
-                Toast.makeText(applicationContext, "Sign up successful!", Toast.LENGTH_LONG)
-                    .show()
-                val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
-                startActivity(intent)
-            } else {
-                Toast.makeText(
-                    applicationContext,
-                    "Sign up failed! Please try again later.",
-                    Toast.LENGTH_LONG
-                ).show()
+        mAuth!!.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(applicationContext, "Sign up successful!", Toast.LENGTH_LONG)
+                        .show()
+                    val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(
+                        applicationContext,
+                        "Sign up failed! Please try again later.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
-        }
     }
 }

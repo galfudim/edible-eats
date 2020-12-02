@@ -42,6 +42,7 @@
     <string name="what_is_your_diet">What is your diet?</string>
     <string name="select_your_favorite_foods">Select your favorite foods:</string>
     <string name="find_those_eateries">Find those Eateries!</string>
+    <string name="menu_options">Menu Options</string>
 
     <!--  Used for Sliding Images  -->
     <string-array name="images_array">

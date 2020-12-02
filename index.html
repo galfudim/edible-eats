@@ -1,122 +1,131 @@
 <html>
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=windows-1252">
-		<title>Edible Eats</title>
-		<link rel="icon" href="cutlery_transparent.png" type="image/png" sizes="16x16"> 
-		<link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		<style>
-			body {
-				font-family: 'Roboto';
-				background-image: #FFFFFF;
-				color: #FF7800;
-				font-weight: 300;
-				font-size: 1.1rem;
-			}
-			p {
-				color: #000000;
-			}
-			a, a:hover {
-				color: #E7686E;
-				text-decoration: underline;
-			}
-			h1, h2, b {
-				font-weight: 700;
-			}
-			h2, h3 {
-				text-align: center;
-				margin: auto;
-				display: block;
-			}
-			.list-group-item {
-				background: none;
-				color: #E7686E;
-			}
-			img {
-				max-height: 99vh;
-				margin: auto;
-				display: block;
-			}
-		</style>
-	</head>
-	<body>
-		<div id="StayFocusd-infobar" style="display: none; top: 0px;">
-		<img src="chrome-extension://laankejkbhbdhmipfmgcngdelahlfoji/common/img/eye_19x19_red.png">
-		<span id="StayFocusd-infobar-msg"></span>
-		<span id="StayFocusd-infobar-links">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+    <title>Edible Eats</title>
+    <link rel="icon" href="cutlery_transparent.png" type="image/png" sizes="16x16">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Roboto';
+            background-image: #FFFFFF;
+            color: #FF7800;
+            font-weight: 300;
+            font-size: 1.1rem;
+        }
+        
+        p {
+            color: #000000;
+        }
+        
+        a,
+        a:hover {
+            color: #E7686E;
+            text-decoration: underline;
+        }
+        
+        h1,
+        h2,
+        b {
+            font-weight: 700;
+        }
+        
+        h2,
+        h3 {
+            text-align: center;
+            margin: auto;
+            display: block;
+        }
+        
+        .list-group-item {
+            background: none;
+            color: #E7686E;
+        }
+        
+        img {
+            max-height: 99vh;
+            margin: auto;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="StayFocusd-infobar" style="display: none; top: 0px;">
+        <img src="chrome-extension://laankejkbhbdhmipfmgcngdelahlfoji/common/img/eye_19x19_red.png">
+        <span id="StayFocusd-infobar-msg"></span>
+        <span id="StayFocusd-infobar-links">
 			<a id="StayFocusd-infobar-never-show">hide forever</a>&nbsp;&nbsp;|&nbsp;&nbsp;
 			<a id="StayFocusd-infobar-hide">hide once</a>
 		</span>
-		</div>
-		<div class="container pb-5">
-			<div class="row py-4">
-				<div class="col-sm-1">
-					<img src="cutlery_transparent.png" width="100%">
-				</div>
-				<div class="col">
-					<h1>Edible Eats</h1>
-				</div>
-			</div>
-			<hr>
-			<div class="row py-3">
-				<div class="col">
-					<p><b>External link to .apk:</b> <a href="https://www.example.com">https://www.example.com</a></p>
-					<p><b>External link to source zip:</b> <a href="https://www.example.com">https://www.example.com</a></p>
-				</div>
-			</div>
-			<hr>
-			<div class="row">
-				<div class="col">
-					<h2 class="py-4">Description</h2>
-					<p>
-						Edible Eats is an app that allows users to obtain a list of
-						restaurants within the College Park area that meet their dietary restrictions and specialty diets. 
-						Currently, Edible Eats offers support for pescatarian, vegan, vegetarian, and ketogenic lifestyles.
-					</p>
-					<p>
-						Its key functionality is to allow users to find restaurants with specialty items that otherwise they
-						would have to search for by going through various lists of restaurants and checking menu items
-						extraneously! Users initially choose their diet from a drop down menu, select their preference of favorite
-						foods that correspond to the diet and then on submission obtain a list of restaurants. 
-						Edible Eats was developed by Tytan Taliaferro, Gal Fudim, and Aimon Sajid.
-					</p>
-				</div>
-			</div>
-			<div class="row">
-				<h2 class="py-3">Screenshots</h2>
-			</div>
-			<div class="row py-4">
-				<div class="col">
-					<img src="home.png" class="img-thumbnail img-fluid">
-				</div>
-				<div class="col">
-					<img src="sign_in.png" class="img-thumbnail img-fluid">
-				</div>
-				<div class="col">
-					<img src="sign_up.png" class="img-thumbnail img-fluid">
-				</div>
-				<div class="col">
-					<img src="preference.png" class="img-thumbnail img-fluid">
-				</div>
-			</div>
-			<hr>
-			<div class="row">
-				<div class="col">
-					<b>External link to YouTube video:</b> <a href="https://www.example.com">https://www.example.com</a>
-				</div>
-			</div>
-			<hr>
-			<div class="row">
-				<div class="col">
-					<h2 class="py-4">External libraries, code, and icons</h2>
-					<ul class="list-group">
-						<li class="list-group-item">com.google.firebase.database.DataSnapshot</li>
-						<li class="list-group-item">com.google.firebase.database.DatabaseError</li>
-						<li class="list-group-item">com.google.firebase.database.DatabaseReference</li>
-						<li class="list-group-item">com.google.firebase.database.FirebaseDatabase</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</body>
+    </div>
+    <div class="container pb-5">
+        <div class="row py-4">
+            <div class="col-sm-1">
+                <img src="cutlery_transparent.png" width="100%">
+            </div>
+            <div class="col">
+                <h1>Edible Eats</h1>
+            </div>
+        </div>
+        <hr>
+        <div class="row py-3">
+            <div class="col">
+                <p><b>External link to .apk:</b> <a href="https://www.example.com">https://www.example.com</a></p>
+                <p><b>External link to source zip:</b> <a href="https://www.example.com">https://www.example.com</a></p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <h2 class="py-4">Description</h2>
+                <p>
+                    Edible Eats is an app that allows users to obtain a list of restaurants within the College Park area that meet their dietary restrictions and specialty diets. Currently, Edible Eats offers support for pescatarian, vegan, vegetarian, and ketogenic lifestyles.
+                </p>
+                <p>
+                    Its key functionality is to allow users to find restaurants with specialty items that otherwise they would have to search for by going through various lists of restaurants and checking menu items extraneously! Users initially choose their diet from a
+                    drop down menu, select their preference of favorite foods that correspond to the diet and then on submission obtain a list of restaurants. Edible Eats was developed by Tytan Taliaferro, Gal Fudim, and Aimon Sajid.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <h2 class="py-3">Screenshots</h2>
+        </div>
+        <div class="row py-4">
+            <div class="col">
+                <img src="home.png" class="img-thumbnail img-fluid">
+            </div>
+            <div class="col">
+                <img src="sign_in.png" class="img-thumbnail img-fluid">
+            </div>
+            <div class="col">
+                <img src="sign_up.png" class="img-thumbnail img-fluid">
+            </div>
+            <div class="col">
+                <img src="preference.png" class="img-thumbnail img-fluid">
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <b>External link to YouTube video:</b> <a href="https://www.example.com">https://www.example.com</a>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <h2 class="py-4">External libraries, code, and icons</h2>
+                <ul class="list-group">
+                    <li class="list-group-item"><a target="_blank" href="https://firebase.google.com/docs/reference/node/firebase.database.DataSnapshot">com.google.firebase.database.DataSnapshot</a></li>
+                    <li class="list-group-item"><a target="_blank" href="https://firebase.google.com/docs/reference/android/com/google/firebase/database/DatabaseError">com.google.firebase.database.DatabaseError</a></li>
+                    <li class="list-group-item"><a target="_blank" href="https://firebase.google.com/docs/reference/android/com/google/firebase/database/DatabaseReference">com.google.firebase.database.DatabaseReference</a></li>
+                    <li class="list-group-item"><a target="_blank" href="https://firebase.google.com/docs/reference/android/com/google/firebase/database/FirebaseDatabase">com.google.firebase.database.FirebaseDatabase</a></li>
+                    <li class="list-group-item"><a target="_blank" href="https://example.com">TODO: links to images/icon</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>

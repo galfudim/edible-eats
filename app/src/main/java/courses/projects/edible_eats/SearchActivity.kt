@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.*
 
+
 @Suppress("DEPRECATION")
 class SearchActivity : AppCompatActivity() {
     // Firebase database objects
@@ -19,10 +20,9 @@ class SearchActivity : AppCompatActivity() {
     private var mDatabaseReferenceMenuChoices: DatabaseReference? = null
 
     // Menu-related objects
-    private var menuChoices: ArrayList<MenuChoice>? = ArrayList<MenuChoice>()
-    private var restaurantToMenuChoices: HashMap<String, ArrayList<MenuChoice>>? =
-        HashMap<String, ArrayList<MenuChoice>>()
-    private var filtered: ArrayList<String>? = ArrayList<String>()
+    private var menuChoices: ArrayList<MenuChoice>? = ArrayList()
+    private var restaurantToMenuChoices: HashMap<String, ArrayList<MenuChoice>>? = HashMap()
+    private var filtered: ArrayList<String>? = ArrayList()
     private var dataLoaded: Boolean? = false
 
     // View objects
@@ -30,6 +30,8 @@ class SearchActivity : AppCompatActivity() {
     private var mAdapter: ArrayAdapter<String>? = null
     private var mProgress: ProgressDialog? = null
     private var mHandler: Handler? = null
+
+    var restaurantToLocation: HashMap<String, String>? = HashMap()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +50,20 @@ class SearchActivity : AppCompatActivity() {
         }
 
         mHandler = Handler()
+
+        restaurantToLocation = hashMapOf(
+            "Chipotle" to COLLEGE_PARK,
+            "Panda Express" to COLLEGE_PARK,
+            "Bagel Place" to COLLEGE_PARK,
+            "Busboys & Poets" to HYATSVILLE,
+            "SweetGreen" to COLLEGE_PARK,
+            "Playa Bowls" to COLLEGE_PARK,
+            "NuVegan Cafe" to COLLEGE_PARK,
+            "Milk & Honey Cafe" to COLLEGE_PARK,
+            "Azteca Restaurant & Cantina" to COLLEGE_PARK,
+            "Marathon Deli" to COLLEGE_PARK,
+            "Mamma Lucia" to COLLEGE_PARK,
+            "Saladworks" to COLLEGE_PARK)
 
         // Loading data from database
         if (menuChoices!!.isEmpty()) {
@@ -164,6 +180,9 @@ class SearchActivity : AppCompatActivity() {
         const val DIET_SELECTION = "Diet Preference"
         const val MENU_CHOICES = "MenuChoice Names"
         const val RESTAURANT = "Restaurant Name"
+
+        const val COLLEGE_PARK = "College Park, MD"
+        const val HYATSVILLE = "Hyatsville, MD"
         var ALL_CHOICES_LOADED = -1
     }
 }

@@ -2,13 +2,8 @@ package courses.projects.edible_eats
 
 import android.app.ProgressDialog
 import android.content.Intent
-import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
-import android.text.Html
-import android.text.SpannableStringBuilder
-import android.text.Spanned
-import android.text.style.StyleSpan
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
@@ -81,9 +76,9 @@ class SearchActivity : AppCompatActivity() {
                     restaurantToMenuChoices!!.clear()
                     val filteredRestaurants = getRestaurantToMenuChoices()
                     for(restaurant in filteredRestaurants!!.keys) {
-                        val res = Html.fromHtml("<b>$restaurant</b>")
-                        formattedEateries!!.add(res.toString() + ": " + restaurantToLocation!![restaurant])
+                        formattedEateries!!.add(restaurant + ": " + restaurantToLocation!![restaurant])
                     }
+
                     mAdapter!!.addAll(formattedEateries!!.distinct().sorted())
 
                     // Fetch data progress and populate list
@@ -94,6 +89,7 @@ class SearchActivity : AppCompatActivity() {
                     //  onClick go to ListActivity via intent to populate menuChoices,
                     //  iterate though values to get menuChoices for each restaurant
                     mListView!!.setOnItemClickListener { adapterView, view, i, l ->
+                        view.isSelected = true
                         val intent = Intent(this@SearchActivity, ListActivity::class.java)
                         val restaurantName = mListView!!.getItemAtPosition(i).toString().split(":")[0]
                         intent.putExtra(RESTAURANT, restaurantName)

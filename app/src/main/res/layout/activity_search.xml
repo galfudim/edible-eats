@@ -17,6 +17,17 @@
         android:textStyle="bold"
         android:text="@string/edible_eateries_below"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:textColor="@color/main_pink"
+        android:layout_gravity="center"
+        android:layout_marginBottom="14dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:text="@string/click"/>
+
     <!--List View from which data is to be searched-->
     <ListView
         android:id="@+id/listView"

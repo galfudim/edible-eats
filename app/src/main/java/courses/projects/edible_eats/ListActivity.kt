@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 class ListActivity : AppCompatActivity() {
     private var mlistView: ListView? = null
     private lateinit var restaurantName: TextView
-    private lateinit var restaurantLocation: TextView
     private var menuChoicesList: ArrayList<String>? = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {

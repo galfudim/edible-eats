@@ -38,6 +38,5 @@ class ListActivity : AppCompatActivity() {
     companion object {
         const val MENU_CHOICES = "MenuChoice Names"
         const val RESTAURANT = "Restaurant Name"
-        const val LOCATION = "Restaurant Location"
     }
 }

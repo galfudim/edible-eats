@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
@@ -24,7 +25,6 @@ class SearchActivity : AppCompatActivity() {
     private var formattedEateries: ArrayList<String>? = ArrayList()
     private var restaurantToMenuChoices: HashMap<String, ArrayList<MenuChoice>>? = HashMap()
     private var filtered: ArrayList<String>? = ArrayList()
-    private var dataLoaded: Boolean? = false
 
     // View objects
     private var mListView: ListView? = null
@@ -40,15 +40,13 @@ class SearchActivity : AppCompatActivity() {
 
         mDatabase = FirebaseDatabase.getInstance()
         mListView = findViewById(R.id.listView)
-        mAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
+        mAdapter = ArrayAdapter<String>(this, R.layout.custom_list_display)
 
         //  Progress Dialog to simulate retrieving data
-        if (!dataLoaded!!) {
-            mProgress = ProgressDialog.show(
-                this, "Loading Eateries!",
-                "Restaurants are loading. Please wait.", false
-            )
-        }
+        mProgress = ProgressDialog.show(
+            this, "Loading Eateries!",
+            "Restaurants are loading. Please wait.", false
+        )
 
         mHandler = Handler()
 
@@ -82,7 +80,6 @@ class SearchActivity : AppCompatActivity() {
                     mAdapter!!.addAll(formattedEateries!!.distinct().sorted())
 
                     // Fetch data progress and populate list
-                    dataLoaded = true
                     mHandler!!.postDelayed(Runnable { mProgress!!.dismiss() }, 1000)
                     mListView!!.adapter = mAdapter
 
@@ -186,7 +183,6 @@ class SearchActivity : AppCompatActivity() {
         const val DIET_SELECTION = "Diet Preference"
         const val MENU_CHOICES = "MenuChoice Names"
         const val RESTAURANT = "Restaurant Name"
-        const val LOCATION = "Restaurant Location"
 
         const val COLLEGE_PARK = "College Park, MD"
         const val HYATTSVILLE = "Hyattsville, MD"

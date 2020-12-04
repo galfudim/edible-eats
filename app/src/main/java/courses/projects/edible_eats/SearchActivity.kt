@@ -86,7 +86,9 @@ class SearchActivity : AppCompatActivity() {
                     mListView!!.setOnItemClickListener { adapterView, view, i, l ->
                         val intent = Intent(this@SearchActivity, ListActivity::class.java)
                         val restaurantName = mListView!!.getItemAtPosition(i).toString()
+                        val location = restaurantToLocation!!.get(restaurantName)
                         intent.putExtra(RESTAURANT, restaurantName)
+                        intent.putExtra(LOCATION, location)
                         filtered!!.clear()
                         for (choice in filteredRestaurants[restaurantName]!!) {
                             choice.name?.let { filtered!!.add(it) }
@@ -180,6 +182,7 @@ class SearchActivity : AppCompatActivity() {
         const val DIET_SELECTION = "Diet Preference"
         const val MENU_CHOICES = "MenuChoice Names"
         const val RESTAURANT = "Restaurant Name"
+        const val LOCATION = "Restaurant Location"
 
         const val COLLEGE_PARK = "College Park, MD"
         const val HYATSVILLE = "Hyatsville, MD"

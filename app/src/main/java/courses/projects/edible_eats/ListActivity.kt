@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 class ListActivity : AppCompatActivity() {
     private var mlistView: ListView? = null
     private lateinit var restaurantName: TextView
+    private lateinit var restaurantLocation: TextView
     private var menuChoicesList: ArrayList<String>? = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,8 +22,13 @@ class ListActivity : AppCompatActivity() {
         mlistView = findViewById<View>(R.id.listView) as ListView
 
         val restaurant = intent.getStringExtra(RESTAURANT)
+        val location = intent.getStringExtra(LOCATION)
+
         restaurantName = findViewById(R.id.restName)
         restaurantName.text = restaurant
+
+        restaurantLocation = findViewById(R.id.location)
+        restaurantLocation.text = location
 
         menuChoicesList = intent.getStringArrayListExtra(MENU_CHOICES)
         val mAdapter = ArrayAdapter<String>(
@@ -37,5 +43,6 @@ class ListActivity : AppCompatActivity() {
     companion object {
         const val MENU_CHOICES = "MenuChoice Names"
         const val RESTAURANT = "Restaurant Name"
+        const val LOCATION = "Restaurant Location"
     }
 }

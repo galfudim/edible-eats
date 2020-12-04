@@ -52,5 +52,8 @@
         <item>@drawable/panda_express_honey_walnut_shrimp</item>
     </string-array>
 
+    <!--  Search Activity Strings  -->
+    <string name="edible_eateries_below">Edible Eateries Below!</string>
+
 
 </resources>

@@ -15,7 +15,7 @@
         android:textColor="@color/main_pink"
         android:layout_gravity="center"
         android:textStyle="bold"
-        android:text="Edible Eats Below!"/>
+        android:text="@string/edible_eateries_below"/>
 
     <!--List View from which data is to be searched-->
     <ListView

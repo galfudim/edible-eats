@@ -2,6 +2,7 @@ package courses.projects.edible_eats
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.os.Handler
 import android.view.Menu
@@ -83,18 +84,22 @@ class UserPreferenceActivity : AppCompatActivity() {
                     }
                     "Pescatarian" -> {
                         displayFoods("Fish", "Salad", "Taco", "Fries")
+                        option4!!.visibility = VISIBLE
                         toast.show()
                     }
                     "Vegan" -> {
                         displayFoods("Vegetables", "Salad", "Tofu", "Fruit")
+                        option4!!.visibility = VISIBLE
                         toast.show()
                     }
                     "Vegetarian" -> {
                         displayFoods("Faux meat", "Salad", "Taco", "Fries")
+                        option4!!.visibility = VISIBLE
                         toast.show()
                     }
                     "Ketogenic" -> {
-                        displayFoods("Chicken", "Turkey", "Taco", "Beef")
+                        displayFoods("Chicken", "Turkey", "Beef","")
+                        option4!!.visibility = INVISIBLE
                         toast.show()
                     }
                 }
@@ -189,6 +194,7 @@ class UserPreferenceActivity : AppCompatActivity() {
                 dlg.setMessage("Enter profile name")
                 dlg.setTitle("Update Profile Name")
                 dlg.setView(profile)
+                dlg.setIcon(R.drawable.profile_icon)
 
                 dlg.setPositiveButton("Done") { _, _ ->
                     val name = profile.text.toString()

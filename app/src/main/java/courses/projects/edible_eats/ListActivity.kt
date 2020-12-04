@@ -22,13 +22,9 @@ class ListActivity : AppCompatActivity() {
         mlistView = findViewById<View>(R.id.listView) as ListView
 
         val restaurant = intent.getStringExtra(RESTAURANT)
-        val location = intent.getStringExtra(LOCATION)
 
         restaurantName = findViewById(R.id.restName)
         restaurantName.text = restaurant
-
-        restaurantLocation = findViewById(R.id.location)
-        restaurantLocation.text = location
 
         menuChoicesList = intent.getStringArrayListExtra(MENU_CHOICES)
         val mAdapter = ArrayAdapter<String>(

@@ -2,8 +2,13 @@ package courses.projects.edible_eats
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
+import android.text.Html
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.StyleSpan
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
@@ -21,6 +26,7 @@ class SearchActivity : AppCompatActivity() {
 
     // Menu-related objects
     private var menuChoices: ArrayList<MenuChoice>? = ArrayList()
+    private var formattedEateries: ArrayList<String>? = ArrayList()
     private var restaurantToMenuChoices: HashMap<String, ArrayList<MenuChoice>>? = HashMap()
     private var filtered: ArrayList<String>? = ArrayList()
     private var dataLoaded: Boolean? = false
@@ -55,7 +61,7 @@ class SearchActivity : AppCompatActivity() {
             "Chipotle" to COLLEGE_PARK,
             "Panda Express" to COLLEGE_PARK,
             "Bagel Place" to COLLEGE_PARK,
-            "Busboys & Poets" to HYATSVILLE,
+            "Busboys & Poets" to HYATTSVILLE,
             "SweetGreen" to COLLEGE_PARK,
             "Playa Bowls" to COLLEGE_PARK,
             "NuVegan Cafe" to COLLEGE_PARK,
@@ -74,7 +80,11 @@ class SearchActivity : AppCompatActivity() {
                     menuChoices!!.add(value)
                     restaurantToMenuChoices!!.clear()
                     val filteredRestaurants = getRestaurantToMenuChoices()
-                    mAdapter!!.addAll(filteredRestaurants!!.keys.toList().distinct().sorted())
+                    for(restaurant in filteredRestaurants!!.keys) {
+                        val res = Html.fromHtml("<b>$restaurant</b>")
+                        formattedEateries!!.add(res.toString() + ": " + restaurantToLocation!![restaurant])
+                    }
+                    mAdapter!!.addAll(formattedEateries!!.distinct().sorted())
 
                     // Fetch data progress and populate list
                     dataLoaded = true
@@ -85,10 +95,8 @@ class SearchActivity : AppCompatActivity() {
                     //  iterate though values to get menuChoices for each restaurant
                     mListView!!.setOnItemClickListener { adapterView, view, i, l ->
                         val intent = Intent(this@SearchActivity, ListActivity::class.java)
-                        val restaurantName = mListView!!.getItemAtPosition(i).toString()
-                        val location = restaurantToLocation!!.get(restaurantName)
+                        val restaurantName = mListView!!.getItemAtPosition(i).toString().split(":")[0]
                         intent.putExtra(RESTAURANT, restaurantName)
-                        intent.putExtra(LOCATION, location)
                         filtered!!.clear()
                         for (choice in filteredRestaurants[restaurantName]!!) {
                             choice.name?.let { filtered!!.add(it) }
@@ -185,7 +193,7 @@ class SearchActivity : AppCompatActivity() {
         const val LOCATION = "Restaurant Location"
 
         const val COLLEGE_PARK = "College Park, MD"
-        const val HYATSVILLE = "Hyatsville, MD"
+        const val HYATTSVILLE = "Hyattsville, MD"
         var ALL_CHOICES_LOADED = -1
     }
 }

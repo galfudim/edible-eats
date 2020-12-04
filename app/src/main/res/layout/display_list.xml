@@ -17,15 +17,6 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/location"
-        android:layout_width="308dp"
-        android:layout_height="37dp"
-        android:layout_marginBottom="-10dp"
-        android:textColor="@color/main_orange"
-        android:textSize="30dp"
-        android:textStyle="bold" />
-
-    <TextView
         android:id="@+id/menuoption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

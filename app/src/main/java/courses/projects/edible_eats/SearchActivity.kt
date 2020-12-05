@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.*
 
@@ -29,6 +26,7 @@ class SearchActivity : AppCompatActivity() {
     // View objects
     private var mListView: ListView? = null
     private var mAdapter: ArrayAdapter<String>? = null
+    private var mDisplayAdapter: ListItemAdapter? = null
     private var mProgress: ProgressDialog? = null
     private var mHandler: Handler? = null
 
@@ -40,7 +38,7 @@ class SearchActivity : AppCompatActivity() {
 
         mDatabase = FirebaseDatabase.getInstance()
         mListView = findViewById(R.id.listView)
-        mAdapter = ArrayAdapter<String>(this, R.layout.custom_list_display)
+        mAdapter = ArrayAdapter<String>(this, R.layout.custom_centered_item)
 
         //  Progress Dialog to simulate retrieving data
         mProgress = ProgressDialog.show(
@@ -62,7 +60,8 @@ class SearchActivity : AppCompatActivity() {
             "Azteca Restaurant & Cantina" to COLLEGE_PARK,
             "Marathon Deli" to COLLEGE_PARK,
             "Mamma Lucia" to COLLEGE_PARK,
-            "Saladworks" to COLLEGE_PARK)
+            "Saladworks" to COLLEGE_PARK
+        )
 
         // Loading data from database
         if (menuChoices!!.isEmpty()) {
@@ -73,11 +72,15 @@ class SearchActivity : AppCompatActivity() {
                     menuChoices!!.add(value)
                     restaurantToMenuChoices!!.clear()
                     val filteredRestaurants = getRestaurantToMenuChoices()
-                    for(restaurant in filteredRestaurants!!.keys) {
+                    for (restaurant in filteredRestaurants!!.keys) {
                         formattedEateries!!.add(restaurant + ": " + restaurantToLocation!![restaurant])
                     }
 
-                    mAdapter!!.addAll(formattedEateries!!.distinct().sorted())
+                    val sortedRestaurants = formattedEateries!!.sorted()
+                    mDisplayAdapter = ListItemAdapter(applicationContext, R.layout.custom_list_item,
+                        sortedRestaurants
+                    )
+                    mAdapter!!.addAll(sortedRestaurants)
 
                     // Fetch data progress and populate list
                     mHandler!!.postDelayed(Runnable { mProgress!!.dismiss() }, 1000)
@@ -87,7 +90,7 @@ class SearchActivity : AppCompatActivity() {
                     //  iterate though values to get menuChoices for each restaurant
                     mListView!!.setOnItemClickListener { adapterView, view, i, l ->
                         view.isSelected = true
-                        val intent = Intent(this@SearchActivity, ListActivity::class.java)
+                        val intent = Intent(this@SearchActivity, MenuChoiceActivity::class.java)
                         val restaurantName = mListView!!.getItemAtPosition(i).toString().split(":")[0]
                         intent.putExtra(RESTAURANT, restaurantName)
                         filtered!!.clear()
@@ -108,13 +111,14 @@ class SearchActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_search, menu)
 
         val searchViewItem: MenuItem = menu.findItem(R.id.search_bar)
-        val searchView = searchViewItem.actionView as android.widget.SearchView
+        val searchView = searchViewItem.actionView as SearchView
         searchView.queryHint = "Search Restaurants"
         searchView.setOnQueryTextListener(
-            object : android.widget.SearchView.OnQueryTextListener {
+            object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
                     if (restaurantToMenuChoices!!.contains(query)) {
                         mAdapter!!.filter.filter(query)
+//                        mDisplayAdapter!!.filter.filter(query)
                     } else {
                         Toast.makeText(
                             this@SearchActivity, "Restaurant Not Found",
@@ -126,6 +130,8 @@ class SearchActivity : AppCompatActivity() {
 
                 override fun onQueryTextChange(newText: String): Boolean {
                     mAdapter!!.filter.filter(newText)
+//                  mDisplayAdapter!!.filter.filter(newText)
+//                  val items = mDisplayAdapter!!.getDataChanged()
                     return false
                 }
             })

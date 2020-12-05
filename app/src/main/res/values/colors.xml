@@ -12,4 +12,5 @@
     <color name="alter_orange">#FF9800</color>
     <color name="alter_yellow">#FEC600</color>
     <color name="alter_green">#4CAF50</color>
+    <color name="alter_grey">#CFCFCF</color>
 </resources>

@@ -2,7 +2,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/bkgrnd"
     android:layout_height="match_parent"
+    android:backgroundTint="#10FFFFFF"
+    android:backgroundTintMode="src_over"
     android:padding="36dp">
 
     <LinearLayout
@@ -13,21 +16,29 @@
         android:padding="16dp"
         tools:context=".HomeActivity">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="36dp"
-            android:textColor="@color/main_pink"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:text="@string/edible_eats"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="152dp"
-            android:layout_height="158dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="150dp"
-            android:background="@drawable/cutlery" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/edible_eats"
+                android:textColor="@color/white"
+                android:textSize="36dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="152dp"
+                android:layout_height="158dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="150dp"
+                android:background="@drawable/cutlery_transparent" />
+        </LinearLayout>
 
 
         <androidx.appcompat.widget.AppCompatButton

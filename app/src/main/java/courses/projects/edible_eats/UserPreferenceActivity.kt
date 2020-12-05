@@ -2,7 +2,6 @@ package courses.projects.edible_eats
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.os.Handler
 import android.view.Menu
@@ -22,11 +21,11 @@ class UserPreferenceActivity : AppCompatActivity() {
     private var option2: CheckBox? = null
     private var option3: CheckBox? = null
     private var option4: CheckBox? = null
-    private var search: Button? = null
+    private var searchButton: Button? = null
     private var dietOption: String? = null
-    private var profileName: TextView? = null
+    private var mProfileName: TextView? = null
     private var foodOptions: LinearLayout? = null
-    private var select: TextView? = null
+    private var mSelect: TextView? = null
     private var imagesArray: Array<String>? = null
     private var currentPage = 0
     private var viewPager: ViewPager2? = null
@@ -40,17 +39,17 @@ class UserPreferenceActivity : AppCompatActivity() {
         option2 = findViewById(R.id.option2)
         option3 = findViewById(R.id.option3)
         option4 = findViewById(R.id.option4)
-        search = findViewById(R.id.search)
-        profileName = findViewById(R.id.profile_name_text)
+        searchButton = findViewById(R.id.search)
+        mProfileName = findViewById(R.id.profile_name_text)
         foodOptions = findViewById(R.id.food_options)
-        select = findViewById(R.id.select_text)
+        mSelect = findViewById(R.id.select_text)
         viewPager = findViewById(R.id.viewPager)
 
         // Sliding images view
         updateViewPager()
 
         // Navigate to Search Activity
-        search!!.setOnClickListener {
+        searchButton!!.setOnClickListener {
             search()
         }
 
@@ -60,7 +59,7 @@ class UserPreferenceActivity : AppCompatActivity() {
         // Default Spinner selection
         dietSelection.setSelection(0, false)
         addDietSelection(SELECT)
-        select!!.visibility = INVISIBLE
+        mSelect!!.visibility = INVISIBLE
         foodOptions!!.visibility = INVISIBLE
 
         dietSelection.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -70,15 +69,16 @@ class UserPreferenceActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-                select!!.visibility = VISIBLE
+                mSelect!!.visibility = VISIBLE
                 foodOptions!!.visibility = VISIBLE
-                var toast = Toast.makeText(
+                val toast = Toast.makeText(
                     applicationContext, "You selected " + dietOptions[position], Toast.LENGTH_SHORT
                 )
 
+                // Display food options for selected diet
                 when (dietOptions[position]) {
                     SELECT -> {
-                        select!!.visibility = INVISIBLE
+                        mSelect!!.visibility = INVISIBLE
                         foodOptions!!.visibility = INVISIBLE
                         clearSelections()
                     }
@@ -114,6 +114,7 @@ class UserPreferenceActivity : AppCompatActivity() {
 
     }
 
+    // Modifies checkbox text
     private fun displayFoods(food1: String, food2: String, food3: String, food4: String) {
         clearSelections()
         option1!!.text = food1
@@ -130,7 +131,7 @@ class UserPreferenceActivity : AppCompatActivity() {
     }
 
     private fun addFoodPreferences(): ArrayList<String> {
-        var foodPreferences = ArrayList<String>()
+        val foodPreferences = ArrayList<String>()
 
         if (option1!!.isChecked) {
             foodPreferences.add(option1!!.text as String)
@@ -156,7 +157,7 @@ class UserPreferenceActivity : AppCompatActivity() {
     }
 
     private fun search() {
-        var intent = Intent(this@UserPreferenceActivity, SearchActivity::class.java)
+        val intent = Intent(this@UserPreferenceActivity, SearchActivity::class.java)
         // Validate selection
         if (dietOption == SELECT) {
             Toast.makeText(
@@ -180,15 +181,16 @@ class UserPreferenceActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
-        return true;
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val dlg: AlertDialog.Builder = AlertDialog.Builder(this)
 
+        // Displays profile name and diet descriptions
         when (item.itemId) {
             R.id.profile_name -> {
-                profileName!!.text = getString(R.string.pick_your_preferences)
+                mProfileName!!.text = getString(R.string.pick_your_preferences)
                 val profile = EditText(this)
 
                 dlg.setMessage("Enter profile name")
@@ -198,7 +200,7 @@ class UserPreferenceActivity : AppCompatActivity() {
 
                 dlg.setPositiveButton("Done") { _, _ ->
                     val name = profile.text.toString()
-                    profileName!!.text = profileName!!.text.toString() + ", " + name + "!"
+                    mProfileName!!.text = mProfileName!!.text.toString() + ", " + name.trim() + "!"
                 }
 
                 dlg.setNegativeButton("Cancel") { _, _ ->
@@ -232,6 +234,8 @@ class UserPreferenceActivity : AppCompatActivity() {
         }
     }
 
+    // Utilized https://blog.usejournal.com/how-to-auto-scroll-viewpager2-in-android-672e6dcee13d
+    // to assist with this feature
     private fun updateViewPager() {
         imagesArray = resources.getStringArray(R.array.images_array)
 
@@ -242,6 +246,7 @@ class UserPreferenceActivity : AppCompatActivity() {
 
         val handler = Handler()
         val update = Runnable {
+            // Restarts scrolling view
             if (currentPage == imagesArray!!.size) {
                 currentPage = 0
             }
@@ -250,11 +255,12 @@ class UserPreferenceActivity : AppCompatActivity() {
             viewPager!!.setCurrentItem(currentPage++, true)
         }
 
+        // Move to next image every 3 seconds
         Timer().schedule(object : TimerTask() {
             override fun run() {
                 handler.post(update)
             }
-        }, 3500, 3500)
+        }, 3000, 3000)
     }
 
 

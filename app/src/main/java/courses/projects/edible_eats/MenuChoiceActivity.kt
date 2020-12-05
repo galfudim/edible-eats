@@ -11,24 +11,24 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MenuChoiceActivity : AppCompatActivity() {
     private var mlistView: ListView? = null
-    private lateinit var restaurantName: TextView
-    private var menuChoicesList: ArrayList<String>? = ArrayList<String>()
+    private lateinit var mRestaurantName: TextView
+    private var mAdapter: ArrayAdapter<String>? = null
+    private var menuChoicesList: ArrayList<String>? = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_choice)
 
         mlistView = findViewById<View>(R.id.listView) as ListView
+        mRestaurantName = findViewById(R.id.restName)
 
         val restaurant = intent.getStringExtra(RESTAURANT)
-
-        restaurantName = findViewById(R.id.restName)
-        restaurantName.text = restaurant
+        mRestaurantName.text = restaurant
 
         menuChoicesList = intent.getStringArrayListExtra(MENU_CHOICES)
-        val mAdapter = ArrayAdapter<String>(
+        mAdapter = ArrayAdapter<String>(
             this@MenuChoiceActivity,
-            R.layout.custom_centered_item,
+            R.layout.custom_list_item,
             menuChoicesList!!
         )
 

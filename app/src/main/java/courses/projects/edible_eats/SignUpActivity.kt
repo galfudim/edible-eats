@@ -13,8 +13,8 @@ import com.google.firebase.auth.FirebaseAuth
 
 class SignUpActivity : AppCompatActivity() {
 
-    private var emailTV: EditText? = null
-    private var passwordTV: EditText? = null
+    private var mEmail: EditText? = null
+    private var mPassword: EditText? = null
     private var signUpButton: Button? = null
     private var mAuth: FirebaseAuth? = null
     private var progressBar: ProgressBar? = null
@@ -24,8 +24,8 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
 
         mAuth = FirebaseAuth.getInstance()
-        emailTV = findViewById(R.id.email)
-        passwordTV = findViewById(R.id.password)
+        mEmail = findViewById(R.id.email)
+        mPassword = findViewById(R.id.password)
         signUpButton = findViewById(R.id.sign_up)
         progressBar = findViewById(R.id.progressBar)
 
@@ -37,13 +37,14 @@ class SignUpActivity : AppCompatActivity() {
     private fun signUpNewUser() {
         progressBar!!.visibility = View.VISIBLE
 
-        val email: String = emailTV!!.text.toString()
-        val password: String = passwordTV!!.text.toString()
+        val email: String = mEmail!!.text.toString()
+        val password: String = mPassword!!.text.toString()
 
         // Verifies that email & password are valid
         if (!verifiedEmail(email)) {
             Toast.makeText(applicationContext, "Please enter a valid email", Toast.LENGTH_LONG)
                 .show()
+            progressBar?.visibility = View.INVISIBLE
             return
         }
 
@@ -53,6 +54,7 @@ class SignUpActivity : AppCompatActivity() {
                 "Please enter a valid password (at least 6 characters with 1 letter and 1 " +
                         "number", Toast.LENGTH_LONG
             ).show()
+            progressBar?.visibility = View.INVISIBLE
             return
         }
 

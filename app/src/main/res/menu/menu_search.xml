@@ -5,7 +5,7 @@
     <!--Search view widget as item in menu-->
     <item
         android:id="@+id/search_bar"
-        android:title="Search"
+        android:title="@string/search"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="ifRoom|withText"/>
 </menu>

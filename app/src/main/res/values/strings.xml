@@ -22,10 +22,14 @@
     <string name="pescatarian">Pescatarian</string>
     <string name="ketogenic">Ketogenic</string>
 
-    <string name="vegan_info"> Vegan diet is devoid of all animal products, including meat, eggs and dairy.</string>
+    <!-- Utilized link for vegan definition https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiS0K6Jq7ftAhXRqFkKHd2pAtYQFjAMegQIGxAC&url=https%3A%2F%2Fwww.healthline.com%2Fnutrition%2Fvegan-diet-guide&usg=AOvVaw0Mx9wCRrgIgk2W5W1sRKtm -->
+    <!-- Utilized link for ketogenic definition https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwj75LfnqrftAhWkuVkKHVvPCUUQFjAAegQIARAC&url=https%3A%2F%2Fwww.webmd.com%2Fdiet%2Fss%2Fslideshow-ketogenic-diet&usg=AOvVaw1TkLjmgSI2LHafpsvz8R9_ -->
+    <!-- Utilized link for vegetarian definition https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjlxpjYqrftAhUCqlkKHekxAQUQFjAAegQIAhAC&url=https%3A%2F%2Fmedlineplus.gov%2Fency%2Farticle%2F002465.htm&usg=AOvVaw1wfOcCcfBKUXPv5YN17yy9 -->
+    <!-- Utilized link for pescatarian definition https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiY1PizqrftAhXGzVkKHdINCf0QFjAHegQIBRAC&url=https%3A%2F%2Fwww.healthline.com%2Fnutrition%2Fpescatarian-diet&usg=AOvVaw31UdH9YbsgdmaRj39J3TaT -->
+    <string name="vegan_info"> A vegan diet is devoid of all animal products, including meat, eggs and dairy.</string>
     <string name="vegetarian_info">A vegetarian diet does not include any meat, poultry, or seafood. It is a meal plan made up of foods that come mostly from plants. </string>
-    <string name="pescatarian_info">Pescatarian is a diet that incorporates seafood as the only source of meat in an otherwise vegetarian diet</string>
-    <string name="ketogenic_info">“Ketogenic” is a term for a low-carb diet (like the Atkins diet). The idea is for you to get more calories from protein and fat and less from carbohydrates. You cut back most on the carbs that are easy to digest, like sugar, soda, pastries, and white bread.</string>
+    <string name="pescatarian_info">A pescatarian diet incorporates seafood as the only source of meat in an otherwise vegetarian diet</string>
+    <string name="ketogenic_info">A ketogenic diet is a term for a low-carb diet (like the Atkins diet). The idea is for you to get more calories from protein and fat and less from carbohydrates. You cut back most on the carbs that are easy to digest, like sugar, soda, pastries, and white bread.</string>
 
     <!--  Home/Sign In/Sign Up Activity Strings  -->
     <string name="edible_eats">EDIBLE EATS</string>
@@ -55,6 +59,7 @@
     <!--  Search Activity Strings  -->
     <string name="edible_eateries_below">Edible Eateries Below!</string>
     <string name="click">Click any restaurant to view menu choice(s)</string>
+    <string name="search">Search</string>
 
 
 </resources>

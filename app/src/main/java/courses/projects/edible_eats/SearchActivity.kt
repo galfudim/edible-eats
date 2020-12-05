@@ -26,7 +26,6 @@ class SearchActivity : AppCompatActivity() {
     // View objects
     private var mListView: ListView? = null
     private var mAdapter: ArrayAdapter<String>? = null
-    private var mDisplayAdapter: ListItemAdapter? = null
     private var mProgress: ProgressDialog? = null
     private var mHandler: Handler? = null
 
@@ -38,7 +37,7 @@ class SearchActivity : AppCompatActivity() {
 
         mDatabase = FirebaseDatabase.getInstance()
         mListView = findViewById(R.id.listView)
-        mAdapter = ArrayAdapter<String>(this, R.layout.custom_centered_item)
+        mAdapter = ArrayAdapter<String>(this, R.layout.custom_list_item)
 
         //  Progress Dialog to simulate retrieving data
         mProgress = ProgressDialog.show(
@@ -48,6 +47,7 @@ class SearchActivity : AppCompatActivity() {
 
         mHandler = Handler()
 
+        // Map of restuarants based on location
         restaurantToLocation = hashMapOf(
             "Chipotle" to COLLEGE_PARK,
             "Panda Express" to COLLEGE_PARK,
@@ -65,6 +65,8 @@ class SearchActivity : AppCompatActivity() {
 
         // Loading data from database
         if (menuChoices!!.isEmpty()) {
+            // Utilized https://medium.com/a-practical-guide-to-firebase-on-android/storing-and-retrieving-data-from-firebase-with-kotlin-on-android-91c36680771
+            // to assist with Callback logic
             readMenuChoiceData(object : MenuChoiceCallback {
                 override fun onCallbackMenuChoice(value: MenuChoice) {
                     // For every menuChoice in DB add to list
@@ -77,19 +79,15 @@ class SearchActivity : AppCompatActivity() {
                     }
 
                     val sortedRestaurants = formattedEateries!!.sorted()
-                    mDisplayAdapter = ListItemAdapter(applicationContext, R.layout.custom_list_item,
-                        sortedRestaurants
-                    )
                     mAdapter!!.addAll(sortedRestaurants)
 
                     // Fetch data progress and populate list
                     mHandler!!.postDelayed(Runnable { mProgress!!.dismiss() }, 1000)
-                    mListView!!.adapter = mDisplayAdapter
+                    mListView!!.adapter = mAdapter
 
-                    //  onClick go to ListActivity via intent to populate menuChoices,
+                    //  onClick go to MenuChoiceActivity via intent to populate menuChoices,
                     //  iterate though values to get menuChoices for each restaurant
                     mListView!!.setOnItemClickListener { adapterView, view, i, l ->
-                        view.isSelected = true
                         val intent = Intent(this@SearchActivity, MenuChoiceActivity::class.java)
                         val restaurantName = mListView!!.getItemAtPosition(i).toString().split(":")[0]
                         intent.putExtra(RESTAURANT, restaurantName)
@@ -118,7 +116,6 @@ class SearchActivity : AppCompatActivity() {
                 override fun onQueryTextSubmit(query: String): Boolean {
                     if (restaurantToMenuChoices!!.contains(query)) {
                         mAdapter!!.filter.filter(query)
-//                        mDisplayAdapter!!.filter.filter(query)
                     } else {
                         Toast.makeText(
                             this@SearchActivity, "Restaurant Not Found",
@@ -130,9 +127,6 @@ class SearchActivity : AppCompatActivity() {
 
                 override fun onQueryTextChange(newText: String): Boolean {
                     mAdapter!!.filter.filter(newText)
-//                  mDisplayAdapter!!.filter.filter(newText)
-//                  val items = mDisplayAdapter!!.getDataChanged()
-
                     return false
                 }
             })
@@ -167,13 +161,14 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun readMenuChoiceData(callback: MenuChoiceCallback) {
+        // Utilized https://medium.com/a-practical-guide-to-firebase-on-android/storing-and-retrieving-data-from-firebase-with-kotlin-on-android-91c36680771
+        // to assist with Callback logic
         mDatabaseReferenceMenuChoices = mDatabase!!.reference.child("menuChoices")
         mDatabaseReferenceMenuChoices!!.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 ALL_CHOICES_LOADED = dataSnapshot.children.count()
 
                 for (menuChoiceSnapshot in dataSnapshot.children) {
-
                     val menuChoice = menuChoiceSnapshot.getValue(MenuChoice::class.java)
                     callback.onCallbackMenuChoice(menuChoice!!)
                 }

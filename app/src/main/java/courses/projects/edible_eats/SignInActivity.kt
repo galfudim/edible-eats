@@ -46,21 +46,25 @@ class SignInActivity : AppCompatActivity() {
         val email: String = userEmail?.text.toString()
         val password: String = userPassword?.text.toString()
 
+        // Ensure fields aren't empty
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(applicationContext, "Please enter email...", Toast.LENGTH_LONG).show()
+            progressBar?.visibility = View.INVISIBLE
             return
         }
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(applicationContext, "Please enter password!", Toast.LENGTH_LONG).show()
+            progressBar?.visibility = View.INVISIBLE
             return
         }
 
+        // Sign in User
         mAuth!!.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(applicationContext, "Sign in successful!", Toast.LENGTH_LONG)
                         .show()
-                    var intent = Intent(this@SignInActivity, UserPreferenceActivity::class.java)
+                    val intent = Intent(this@SignInActivity, UserPreferenceActivity::class.java)
                     intent.putExtra(USER_ID, mAuth!!.currentUser!!.uid)
                     startActivity(intent)
                 } else {

@@ -18,7 +18,6 @@ class SignUpActivity : AppCompatActivity() {
     private var signUpButton: Button? = null
     private var mAuth: FirebaseAuth? = null
     private var progressBar: ProgressBar? = null
-    private var validator = SignUpVerification()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,21 +34,20 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    //
     private fun signUpNewUser() {
         progressBar!!.visibility = View.VISIBLE
 
         val email: String = emailTV!!.text.toString()
         val password: String = passwordTV!!.text.toString()
 
-        // Validates Email & Password
-        if (!validator.verifyEmail(email)) {
+        // Verifies that email & password are valid
+        if (!verifiedEmail(email)) {
             Toast.makeText(applicationContext, "Please enter a valid email", Toast.LENGTH_LONG)
                 .show()
             return
         }
 
-        if (!validator.verifyPassword(password)) {
+        if (!verifiedPassword(password)) {
             Toast.makeText(
                 applicationContext,
                 "Please enter a valid password (at least 6 characters with 1 letter and 1 " +
@@ -73,5 +71,34 @@ class SignUpActivity : AppCompatActivity() {
                     ).show()
                 }
             }
+    }
+
+    private fun verifiedEmail(email: String?): Boolean {
+        return if (email.isNullOrEmpty()) {
+            false
+        } else {
+            EMAIL_REGEX!!.matches(email)
+        }
+    }
+
+    private fun verifiedPassword(password: String?): Boolean {
+        return if (password.isNullOrEmpty()) {
+            false
+        } else {
+            PASSWORD_REGEX!!.matches(password)
+        }
+    }
+
+    companion object {
+        var EMAIL_REGEX: Regex? = Regex(
+            "(?:[a-z0-9!#\$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#\$%&'" +
+                    "*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x" +
+                    "5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z" +
+                    "0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4" +
+                    "][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z" +
+                    "0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|" +
+                    "\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)])"
+        )
+        var PASSWORD_REGEX: Regex? = Regex("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}\$")
     }
 }

@@ -18,7 +18,7 @@ class SignUpActivity : AppCompatActivity() {
     private var signUpButton: Button? = null
     private var mAuth: FirebaseAuth? = null
     private var progressBar: ProgressBar? = null
-    private var validator = Validators()
+    private var validator = SignUpVerification()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,19 +35,21 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
+    //
     private fun signUpNewUser() {
         progressBar!!.visibility = View.VISIBLE
 
         val email: String = emailTV!!.text.toString()
         val password: String = passwordTV!!.text.toString()
 
-        if (!validator.validEmail(email)) {
+        // Validates Email & Password
+        if (!validator.verifyEmail(email)) {
             Toast.makeText(applicationContext, "Please enter a valid email", Toast.LENGTH_LONG)
                 .show()
             return
         }
 
-        if (!validator.validPassword(password)) {
+        if (!validator.verifyPassword(password)) {
             Toast.makeText(
                 applicationContext,
                 "Please enter a valid password (at least 6 characters with 1 letter and 1 " +

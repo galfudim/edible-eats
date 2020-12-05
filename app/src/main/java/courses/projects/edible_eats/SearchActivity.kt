@@ -84,7 +84,7 @@ class SearchActivity : AppCompatActivity() {
 
                     // Fetch data progress and populate list
                     mHandler!!.postDelayed(Runnable { mProgress!!.dismiss() }, 1000)
-                    mListView!!.adapter = mAdapter
+                    mListView!!.adapter = mDisplayAdapter
 
                     //  onClick go to ListActivity via intent to populate menuChoices,
                     //  iterate though values to get menuChoices for each restaurant
@@ -132,6 +132,7 @@ class SearchActivity : AppCompatActivity() {
                     mAdapter!!.filter.filter(newText)
 //                  mDisplayAdapter!!.filter.filter(newText)
 //                  val items = mDisplayAdapter!!.getDataChanged()
+
                     return false
                 }
             })

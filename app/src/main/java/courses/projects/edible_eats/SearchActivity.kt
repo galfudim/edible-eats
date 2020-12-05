@@ -82,7 +82,7 @@ class SearchActivity : AppCompatActivity() {
                     mAdapter!!.addAll(sortedRestaurants)
 
                     // Fetch data progress and populate list
-                    mHandler!!.postDelayed(Runnable { mProgress!!.dismiss() }, 1000)
+                    mHandler!!.postDelayed({ mProgress!!.dismiss() }, 1000)
                     mListView!!.adapter = mAdapter
 
                     //  onClick go to MenuChoiceActivity via intent to populate menuChoices,

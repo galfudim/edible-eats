@@ -1,10 +1,9 @@
 <resources>
     <string name="app_name">Edible Eats</string>
-    <string name="action_settings">Settings</string>
 
     <!--  Strings used for diet spinner  -->
     <string-array name="diets_array">
-        <item>Select a diet...</item>
+        <item>Select a diet…</item>
         <item>Pescatarian</item>
         <item>Vegan</item>
         <item>Vegetarian</item>

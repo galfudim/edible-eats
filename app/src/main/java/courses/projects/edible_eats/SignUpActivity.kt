@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 
-
 class SignUpActivity : AppCompatActivity() {
 
     private var mEmail: EditText? = null
@@ -34,6 +33,7 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
+    // Some of the logic for signing up a user was modeled on the logic in Lab 7
     private fun signUpNewUser() {
         progressBar!!.visibility = View.VISIBLE
 

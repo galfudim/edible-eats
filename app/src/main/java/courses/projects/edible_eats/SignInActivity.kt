@@ -39,6 +39,7 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
+    // Some of the logic for signing in a user was modeled on the logic in Lab 7
     private fun signInUserAccount() {
         progressBar?.visibility = View.VISIBLE
 

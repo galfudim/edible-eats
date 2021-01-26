@@ -1,10 +1,16 @@
 # Description
 
-Edible Eats is an app that allows users to get a list of restaurants within the College Park, MD area that meet their dietary restrictions/preferences. Currently, Edible Eats offers support for pescatarian, vegan, vegetarian, and ketogenic diets.
-
-Users initially choose their diet from a drop down menu, select their preference of favorite foods that correspond to the diet and then on submission obtain a list of restaurants. A user can set their profile name and even view the diet descriptions within the menu options. This provides further personalization and ensures users are making the most informed decisions within the app. After choosing preferences, a list of restaurants and corresponding location in or around the College Park area is displayed. A user can click a restaurant to view the menu choices that matched their preferences.
+Edible Eats is an app that allows users to get a list of restaurants in the College Park, MD area that meet their dietary restrictions/preferences. Currently, Edible Eats offers support for pescatarian, vegan, vegetarian, and ketogenic diets. 
 
 Edible Eats was developed by Gal Fudim, Tytan Taliaferro, and Aimon Sajid in December 2020 as a final project for CMSC436 at the University of Maryland, College Park.
+
+# How to Use
+- Choose a diet from drop down menu
+- Select preference of favorite foods that correspond to the chosen diet and obtains a list of restaurants
+	- *Extra: set profile name and view diet descriptions within menu options!*
+- Submit
+- A list of restaurants and corresponding location in the College Park, MD area is displayed
+- Click a restaurant to view the menu choices that matched their preferences
 
 # Screenshots
 
@@ -12,4 +18,5 @@ Edible Eats was developed by Gal Fudim, Tytan Taliaferro, and Aimon Sajid in Dec
 # Links
 
 [YouTube](https://youtu.be/-F_EC_T-LLs)
+
 [Google Drive](https://docs.google.com/presentation/d/1AF4tbpM_z_kn-wOA16st7RAKAs3CCpScmeFGhS-m6fU/edit?usp=sharing)

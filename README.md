@@ -8,4 +8,4 @@ Edible Eats was developed by Gal Fudim, Tytan Taliaferro, and Aimon Sajid in Dec
 
 # Screenshots
 
-![alt text](home.png)
+![](home.png=198x386)

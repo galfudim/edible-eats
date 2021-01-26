@@ -12,11 +12,8 @@ Edible Eats was developed by Gal Fudim, Tytan Taliaferro, and Aimon Sajid in Dec
 - A list of restaurants and corresponding location in the College Park, MD area is displayed
 - Click a restaurant to view the menu choices that matched their preferences
 
-# Screenshots
-
-
 # Links
 
-[YouTube](https://youtu.be/-F_EC_T-LLs)
+[![](http://img.youtube.com/vi/-F_EC_T-LLs/0.jpg)](http://www.youtube.com/watch?v=-F_EC_T-LLs "Edible Eats Demo")
 
-[Google Drive](https://docs.google.com/presentation/d/1AF4tbpM_z_kn-wOA16st7RAKAs3CCpScmeFGhS-m6fU/edit?usp=sharing)
+[YouTube](https://youtu.be/-F_EC_T-LLs)

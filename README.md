@@ -16,4 +16,4 @@ Edible Eats was developed by Gal Fudim, Tytan Taliaferro, and Aimon Sajid in Dec
 
 [![](http://img.youtube.com/vi/-F_EC_T-LLs/0.jpg)](http://www.youtube.com/watch?v=-F_EC_T-LLs "Edible Eats Demo")
 
-[YouTube](https://youtu.be/-F_EC_T-LLs) (⌘-click this link or the image above to open video in new tab)
+[YouTube](https://youtu.be/-F_EC_T-LLs) (ctrl-click/⌘-click this link or the image above to open video in new tab)
